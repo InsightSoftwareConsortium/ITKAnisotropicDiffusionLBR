@@ -27,7 +27,7 @@ int main(int argc, char **argv)
     }
   catch(itk::ExceptionObject& e)
     {
-    std::cerr << "ITK Exception : " << e.GetDescription() << std::endl;
+    std::cerr << "ITK Exception: " << e.GetDescription() << std::endl;
     return EXIT_FAILURE;
     }
   return EXIT_SUCCESS;
