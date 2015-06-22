@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Anisotropic Diffusion LBR</title>
+  <style>
+    .emscripten { padding-right: 0; margin-left: auto; margin-right: auto; display: block; }
+    textarea.emscripten { font-family: monospace; width: 80%; }
+  </style>
+</head>
+<body>
+  <hr/>
+  <textarea class="emscripten" id="output" rows="10"></textarea>
+  <hr/>
+  <script type="text/javascript">
+    var Module = {
+      preRun: [],
+      postRun: [],
+      print: (function() {
+        var element = document.getElementById('output');
+        if (element) element.value = ''; // clear browser cache
+        return function(text) {
+          if (arguments.length > 1) text = Array.prototype.slice.call(arguments).join(' ');
+          // These replacements are necessary if you render to raw HTML
+          //text = text.replace(/&/g, "&amp;");
+          //text = text.replace(/</g, "&lt;");
+          //text = text.replace(/>/g, "&gt;");
+          //text = text.replace('\n', '<br>', 'g');
+          console.log(text);
+          if (element) {
+            element.value += text + "\n";
+            element.scrollTop = element.scrollHeight; // focus on bottom
+          }
+        };
+      })(),
+      printErr: function(text) {
+        if (arguments.length > 1) text = Array.prototype.slice.call(arguments).join(' ');
+        if (0) { // XXX disabled for safety typeof dump == 'function') {
+          dump(text + '\n'); // fast, straight to the real console
+        } else {
+          console.error(text);
+        }
+      }
+    };
+  </script>
+  <script src="CoherenceEnhancingDiffusion.js"></script>
+  <script type="text/javascript">
+    var main = Module.cwrap('main', 'string', ['string', 'string', 'string',
+      'string', 'string', 'string', 'string']);
+    function run_main() {
+      main('CoherenceEnhancingDiffusion', '/Input/PacMan.png',
+           '/PacManFiltered.png', '20', '0.05', 'cCED', '3');
+    };
+    if(window.onload) {
+      window.onload = function() {
+        window.onload();
+        run_main();
+      }
+    }
+    else {
+      window.onload = run_main;
+    }
+  </script>
+</body>
+</html>
