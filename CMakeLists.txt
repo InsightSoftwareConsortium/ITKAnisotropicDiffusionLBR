@@ -2,9 +2,12 @@ cmake_minimum_required(VERSION 2.8)
 
 project(AnisotropicDiffusionLBR_Examples)
 
-find_package(ITK REQUIRED)
+find_package(ITK REQUIRED
+  COMPONENTS
+    AnisotropicDiffusionLBR
+    ITKIOPNG
+  )
 include(${ITK_USE_FILE})
-
 
 add_executable(CoherenceEnhancingDiffusion
   CoherenceEnhancingDiffusion.cxx)

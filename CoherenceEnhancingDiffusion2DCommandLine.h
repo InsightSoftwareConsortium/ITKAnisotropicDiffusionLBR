@@ -30,7 +30,6 @@
 #include "LinearAnisotropicDiffusionCommandLine.h"
 #include "itkTimeProbe.h"
 #include "itkPNGImageIOFactory.h"
-#include "dirent.h"
 
 namespace CoherenceEnhancingDiffusion2DCommandLine
 {
@@ -244,20 +243,6 @@ int Execute(int argc, char * argv[])
   writer->Update();
   clock.Stop();
   std::cout << "Took: " << clock.GetMean() << " seconds\n";
-
-  DIR *dir;
-struct dirent *ent;
-if ((dir = opendir ("/")) != NULL) {
-  /* print all the files and directories within directory */
-  while ((ent = readdir (dir)) != NULL) {
-    printf ("%s\n", ent->d_name);
-  }
-  closedir (dir);
-} else {
-  /* could not open directory */
-  perror ("");
-  return EXIT_FAILURE;
-}
 
   return EXIT_SUCCESS;
 }
