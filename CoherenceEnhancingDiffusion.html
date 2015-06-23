@@ -40,16 +40,21 @@
         } else {
           console.error(text);
         }
-      }
+      },
+      noInitialRun: true,
+      arguments: ['/Input/PacMan.png', '/PacManFiltered.png',
+                  '20', '0.05', 'cCED', '3']
     };
   </script>
   <script src="CoherenceEnhancingDiffusion.js"></script>
   <script type="text/javascript">
-    var main = Module.cwrap('main', 'string', ['string', 'string', 'string',
+    shouldRunNow = true;
+    var main = Module.cwrap('main', 'number', ['string', 'string', 'string',
       'string', 'string', 'string', 'string']);
     function run_main() {
-      main('CoherenceEnhancingDiffusion', '/Input/PacMan.png',
-           '/PacManFiltered.png', '20', '0.05', 'cCED', '3');
+      args = ['/Input/PacMan.png', '/PacManFiltered.png',
+              '20', '0.05', 'cCED', '3'];
+      Module.callMain(args);
     };
     if(window.onload) {
       window.onload = function() {

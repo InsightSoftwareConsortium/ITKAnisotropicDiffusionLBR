@@ -27,7 +27,8 @@ set(TEST_OUTPUT_DIR /)
 file(MAKE_DIRECTORY ${AnisotropicDiffusionLBR_Examples_BINARY_DIR}/Input)
 file(COPY ${INPUT_DATA_DIR}/PacMan.png
   DESTINATION ${AnisotropicDiffusionLBR_Examples_BINARY_DIR}/Input)
-set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} --embed-file Input")
+set(CMAKE_EXE_LINKER_FLAGS
+  "${CMAKE_EXE_LINKER_FLAGS} --embed-file Input")
 
 
 enable_testing()
