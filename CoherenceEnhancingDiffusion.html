@@ -98,15 +98,7 @@
       }
       outputImage.style.visibility = 'visible';
     };
-    if(window.onload) {
-      window.onload = function() {
-        window.onload();
-        run_main();
-      }
-    }
-    else {
-      window.onload = run_main;
-    }
+    $( window ).load( run_main );
   </script>
 </body>
 </html>
