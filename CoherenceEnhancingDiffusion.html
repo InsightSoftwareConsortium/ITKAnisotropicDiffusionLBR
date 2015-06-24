@@ -24,22 +24,44 @@
 
 <body>
   <div class="container">
+
     <h1>Anisotropic Diffusion LBR</h1>
+
+    <!-- Image display -->
     <div class="row">
       <div class="col-sm-6">
+        <img src="PacMan.png" class="img-responsive center-block" alt="Input image" id="input-image">
         <div class="panel panel-default">
           <div class="panel-heading">Input image</div>
           <div class="panel-body">PacMan.png</div>
         </div>
-        <img src="PacMan.png" class="img-responsive center-block" alt="Input image" id="input-image">
       </div>
       <div class="col-sm-6">
+        <img src="PacMan.png" class="img-responsive center-block"
+             alt="Output image" id="output-image" style="visibility:hidden;">
         <div class="panel panel-success">
           <div class="panel-heading">Output image</div>
           <div class="panel-body">PacMan.png</div>
         </div>
-        <img src="PacMan.png" class="img-responsive center-block"
-             alt="Output image" id="output-image" style="visibility:hidden;">
+      </div>
+    </div>
+
+    <!-- Analysis controls -->
+    <div class="row">
+      <div class="col-md-6">
+      </div>
+      <div class="col-md-6">
+        <div class="panel panel-default">
+          <div class="panel-heading">Execution</div>
+          <div class="panel-body">
+            <div class="progress">
+              <div class="progress-bar" role="progressbar"
+                   aria-valuenow="0" arias-valuemin="0" aria-valuemax="100"
+                   style="width: 0%;" id="execution-progress">
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <!--<hr/>-->
