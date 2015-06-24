@@ -3,12 +3,16 @@ var Filter = function () {
     diffusion_time: 20.0,
     lambda: 0.05,
     diffusion_type: 'cEED',
-    noise_scale: 1.0,
+    noise_scale: 3.0,
     feature_scale: 2.0 };
 };
 
 
 Filter.prototype.execute = function () {
+  progress_element = jQuery('#execution-progress');
+  progress_element.css('width', '0%');
+  progress_element.attr('aria-valuenow', '0');
+  progress_element.html('Starting...');
   var args = ['/Input.png', '/Filtered.png',
     this.parameters.diffusion_time.toString(),
     this.parameters.lambda.toString(),

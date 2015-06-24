@@ -30,6 +30,9 @@
 #include "LinearAnisotropicDiffusionCommandLine.h"
 #include "itkTimeProbe.h"
 #include "itkPNGImageIOFactory.h"
+#include "itkCommand.h"
+
+#include "emscripten.h"
 
 namespace CoherenceEnhancingDiffusion2DCommandLine
 {
@@ -61,7 +64,35 @@ template<int VDimension, typename ScalarType, typename PixelType, typename Expor
 int Execute(int argc, char * argv[]);
 
 
-typedef LinearAnisotropicDiffusionCommandLine::ReportProgressToCErrType ReportProgressToCErrType;
+typedef LinearAnisotropicDiffusionCommandLine::ReportProgressToCOutType ReportProgressToCOutType;
+
+class EmscriptenProgressUpdate: public itk::Command
+{
+public:
+  itkNewMacro(EmscriptenProgressUpdate);
+
+  void Execute(itk::Object *caller, const itk::EventObject & event)
+  {
+    Execute( (const itk::Object *)caller, event);
+  }
+
+  void Execute(const itk::Object * object, const itk::EventObject &)
+  {
+    const int progress = static_cast< int >(100*dynamic_cast<const itk::ProcessObject*>(object)->GetProgress());
+    EM_ASM_ARGS({
+      if(typeof jQuery != 'undefined') {
+        progress_element = jQuery('#execution-progress');
+        progress = $0.toString();
+        if(progress_element.length === 1) {
+          progress_element.css('width', progress + '%');
+          progress_element.attr('aria-valuenow', progress);
+          progress_element.html(progress + '%');
+        }
+      }
+      }, progress);
+  }
+};
+
 
 int Execute(int argc, char * argv[])
 {
@@ -151,8 +182,11 @@ int Execute(int argc, char * argv[])
   typename DiffusionFilterType::Pointer diffusionFilter = DiffusionFilterType::New();
   diffusionFilter->SetInput(reader->GetOutput());
 
-  ReportProgressToCErrType::Pointer reportDiffusionProgress = ReportProgressToCErrType::New();
+  ReportProgressToCOutType::Pointer reportDiffusionProgress = ReportProgressToCOutType::New();
   diffusionFilter->AddObserver(ProgressEvent(), reportDiffusionProgress);
+
+  EmscriptenProgressUpdate::Pointer emscriptenProgress = EmscriptenProgressUpdate::New();
+  diffusionFilter->AddObserver(ProgressEvent(), emscriptenProgress);
 
   int argIndex = 3;
   if( argIndex < argc )
