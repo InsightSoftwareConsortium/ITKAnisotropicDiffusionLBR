@@ -13,6 +13,7 @@ add_executable(CoherenceEnhancingDiffusion
   CoherenceEnhancingDiffusion.cxx)
 target_link_libraries(CoherenceEnhancingDiffusion
   ${ITK_LIBRARIES})
+em_link_pre_js(CoherenceEnhancingDiffusion ${CMAKE_CURRENT_SOURCE_DIR}/js/pre.js)
 
 
 if(NOT INPUT_DATA_DIR)

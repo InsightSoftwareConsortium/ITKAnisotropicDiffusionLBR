@@ -25,8 +25,5 @@ var Module = {
     } else {
       console.error(text);
     }
-  },
-  noInitialRun: true,
-  arguments: ['/Input/PacMan.png', '/PacManFiltered.png',
-              '20', '0.05', 'cCED', '3']
+  }
 };
