@@ -12,14 +12,17 @@
     textarea.emscripten { font-family: monospace; width: 80%; }
   </style>
 
-  <script type="text/javascript" src="js/pace.min.js"></script>
   <link href="css/pace.css" rel="stylesheet">
+  <script type="text/javascript" src="js/pace.min.js"></script>
+
+  <script type="text/javascript" src="js/jquery.min.js"></script>
 
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/bootstrap-theme.min.css" rel="stylesheet">
+  <script type="text/javascript" src="js/bootstrap.min.js" async></script>
+  <link href="css/bootstrap-slider.min.css" rel="stylesheet">
+  <script type="text/javascript" src="js/bootstrap-slider.min.js" async></script>
 
-  <script src="js/jquery.min.js"></script>
-  <script src="js/bootstrap.min.js"></script>
 
   <script type="text/javascript" src="js/EmscriptenDebug.js"></script>
   <script type="text/javascript" src="CoherenceEnhancingDiffusion.js" async></script>
@@ -30,6 +33,7 @@
   <div class="container">
 
     <h1>Anisotropic Diffusion LBR</h1>
+
 
     <!-- Image display -->
     <div class="row">
@@ -50,11 +54,16 @@
       </div>
     </div>
 
+
     <!-- Analysis controls -->
     <div class="row">
+      <!-- Article figure presets -->
       <div class="col-md-6">
       </div>
+
+      <!-- Controls for execution parameters -->
       <div class="col-md-6">
+        <!-- Execution progress bar -->
         <div class="panel panel-default">
           <div class="panel-heading">Execution</div>
           <div class="panel-body">
@@ -66,7 +75,18 @@
             </div>
           </div>
         </div>
+        <!-- Diffusion time -->
+        <div class="well">
+          Diffusion Time &nbsp; <b>0.5</b> &nbsp; &nbsp;
+                 <input id="diffusion-time-slider" type="text"
+                 data-slider-min="0.5" data-slider-max="50"
+                 data-slider-step="0.5" data-slider-value="20" />
+                 &nbsp; &nbsp; <b>50</b>
+        </div>
+        <button id="execute-button" class="btn btn-primary" style="float: right;">Execute</button>
+
       </div>
+
     </div>
     <!--<hr/>-->
     <!--<textarea class="emscripten" id="output" rows="16"></textarea>-->

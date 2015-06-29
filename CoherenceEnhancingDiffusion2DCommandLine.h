@@ -246,20 +246,6 @@ int Execute(int argc, char * argv[])
     itkGenericExceptionMacro("Error: excessive number of arguments");
     }
 
-  /*{
-      std::cerr <<
-      "T: " << diffusionFilter->GetDiffusionTime() << "\n" <<
-      "Lambda: " << diffusionFilter->GetLambda() << "\n" <<
-      "argc: " << argc << "\n";
-
-      diffusionFilter->Update();
-      auto image = diffusionFilter->GetOutput();
-      std::cerr <<
-      image->GetBufferedRegion() << "\n\n" <<
-      "pixel export size: " << sizeof(ExportPixelType) << "\n";
-      ;
-
-  }*/
 
   typedef Image<ExportPixelType,Dimension> ExportImageType;
   typedef CastImageFilter<ImageType, ExportImageType> CasterType;
