@@ -77,11 +77,28 @@
         </div>
         <!-- Diffusion time -->
         <div class="well">
-          Diffusion Time &nbsp; <b>0.5</b> &nbsp; &nbsp;
+          <table class="table">
+            <tr>
+              <td>Diffusion Time &nbsp;</td>
+              <td><b>0.5</b> &nbsp; &nbsp;
                  <input id="diffusion-time-slider" type="text"
                  data-slider-min="0.5" data-slider-max="50"
                  data-slider-step="0.5" data-slider-value="20" />
                  &nbsp; &nbsp; <b>50</b>
+             </td>
+            </tr>
+            <tr>
+              <td>Lambda &nbsp;</td>
+              <td><b>0.05</b> &nbsp; &nbsp;
+                 <input id="lambda-slider" type="text"
+                 data-slider-min="0.0001" data-slider-max="0.05"
+                 data-slider-step="0.0001" data-slider-value="0.01"
+                 style="width: 60%;" />
+                 &nbsp; &nbsp; <b>0.0001</b>
+              </td>
+            </tr>
+            <tr>
+          </table>
         </div>
         <button id="execute-button" class="btn btn-primary" style="float: right;">Execute</button>
 

@@ -71,15 +71,27 @@ Filter.prototype.setDiffusionTime = function(diffusion_time) {
 }
 
 
+Filter.prototype.setLambda = function(lambda) {
+  var value = lambda;
+  if(typeof lambda === 'object') {
+    value = lambda.value;
+  }
+  filter.parameters.lambda = value;
+}
+
+
 var setUpFilterControls = function () {
-  var slider = $('#diffusion-time-slider').slider({
-    min: 0.05,
-    max: 50,
+  $('#diffusion-time-slider').slider({
     scale: 'logarithmic',
-    step: 0.05,
     precision: 2
   })
   .on('slide', filter.setDiffusionTime);
+  $('#lambda-slider').slider({
+    scale: 'logarithmic',
+    precision: 4,
+    reversed: true
+  })
+  .on('slide', filter.setLambda);
 }
 
 
