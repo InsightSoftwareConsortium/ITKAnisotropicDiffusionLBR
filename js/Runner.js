@@ -80,6 +80,15 @@ Filter.prototype.setLambda = function(lambda) {
 }
 
 
+Filter.prototype.setDiffusionType = function(diffusion_type) {
+  var value = diffusion_type;
+  if(typeof diffusion_type === 'object') {
+    value = diffusion_type.target.value;
+  }
+  filter.parameters.diffusion_type = value;
+}
+
+
 var setUpFilterControls = function () {
   $('#diffusion-time-slider').slider({
     scale: 'logarithmic',
@@ -92,6 +101,7 @@ var setUpFilterControls = function () {
     reversed: true
   })
   .on('slide', filter.setLambda);
+  $('#diffusion-type').change(filter.setDiffusionType);
 }
 
 
