@@ -102,6 +102,11 @@ var setUpFilterControls = function () {
   })
   .on('slide', filter.setLambda);
   $('#diffusion-type').change(filter.setDiffusionType);
+  $(document).keypress(function(press) {
+    if(press.which === 13) {
+      filter.execute();
+    }
+  });
 }
 
 
