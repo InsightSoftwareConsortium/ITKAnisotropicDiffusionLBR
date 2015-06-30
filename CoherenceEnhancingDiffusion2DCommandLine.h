@@ -81,7 +81,7 @@ public:
     const int progress = static_cast< int >(100*dynamic_cast<const itk::ProcessObject*>(object)->GetProgress());
     EM_ASM_ARGS({
       if(typeof jQuery != 'undefined') {
-        progress_element = jQuery('#execution-progress');
+        var progress_element = jQuery('#execution-progress');
         progress = $0.toString();
         if(progress_element.length === 1) {
           progress_element.css('width', progress + '%');

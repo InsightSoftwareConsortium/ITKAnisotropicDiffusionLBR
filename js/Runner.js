@@ -89,24 +89,56 @@ Filter.prototype.setDiffusionType = function(diffusion_type) {
 }
 
 
+Filter.prototype.setNoiseScale = function(noise_scale) {
+  var value = noise_scale;
+  if(typeof noise_scale === 'object') {
+    value = noise_scale.value;
+  }
+  filter.parameters.noise_scale = value;
+}
+
+
+Filter.prototype.setFeatureScale = function(feature_scale) {
+  var value = feature_scale;
+  if(typeof feature_scale === 'object') {
+    value = feature_scale.value;
+  }
+  filter.parameters.feature_scale = value;
+}
+
+
 var setUpFilterControls = function () {
   $('#diffusion-time-slider').slider({
     scale: 'logarithmic',
     precision: 2
   })
   .on('slide', filter.setDiffusionTime);
+
   $('#lambda-slider').slider({
     scale: 'logarithmic',
     precision: 4,
     reversed: true
   })
   .on('slide', filter.setLambda);
+
   $('#diffusion-type').change(filter.setDiffusionType);
+
+  $('#noise-scale-slider').slider({
+    precision: 1
+  })
+  .on('slide', filter.setNoiseScale);
+
+  $('#feature-scale-slider').slider({
+    precision: 1
+  })
+  .on('slide', filter.setFeatureScale);
+
   $(document).keypress(function(press) {
     if(press.which === 13) {
       filter.execute();
     }
   });
+
 }
 
 
