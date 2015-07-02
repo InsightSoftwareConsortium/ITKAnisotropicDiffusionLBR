@@ -11,9 +11,6 @@ var Filter = function () {
     feature_scale: 2.0 };
 };
 
-var filter = new Filter();
-
-
 
 Filter.prototype.execute = function () {
   progress_element = jQuery('#execution-progress');
@@ -62,49 +59,7 @@ Filter.prototype.setInputFile = function (file_name) {
 };
 
 
-Filter.prototype.setDiffusionTime = function(diffusion_time) {
-  var value = diffusion_time;
-  if(typeof diffusion_time === 'object') {
-    value = diffusion_time.value;
-  }
-  filter.parameters.diffusion_time = value;
-}
-
-
-Filter.prototype.setLambda = function(lambda) {
-  var value = lambda;
-  if(typeof lambda === 'object') {
-    value = lambda.value;
-  }
-  filter.parameters.lambda = value;
-}
-
-
-Filter.prototype.setDiffusionType = function(diffusion_type) {
-  var value = diffusion_type;
-  if(typeof diffusion_type === 'object') {
-    value = diffusion_type.target.value;
-  }
-  filter.parameters.diffusion_type = value;
-}
-
-
-Filter.prototype.setNoiseScale = function(noise_scale) {
-  var value = noise_scale;
-  if(typeof noise_scale === 'object') {
-    value = noise_scale.value;
-  }
-  filter.parameters.noise_scale = value;
-}
-
-
-Filter.prototype.setFeatureScale = function(feature_scale) {
-  var value = feature_scale;
-  if(typeof feature_scale === 'object') {
-    value = feature_scale.value;
-  }
-  filter.parameters.feature_scale = value;
-}
+var filter = new Filter();
 
 
 var setUpFilterControls = function () {
@@ -112,27 +67,38 @@ var setUpFilterControls = function () {
     scale: 'logarithmic',
     precision: 2
   })
-  .on('slide', filter.setDiffusionTime);
+  .on('slide', function(ee) {
+    filter.parameters.diffusion_time = ee.value;
+  });
 
   $('#lambda-slider').slider({
     scale: 'logarithmic',
     precision: 4,
     reversed: true
   })
-  .on('slide', filter.setLambda);
+  .on('slide', function(ee) {
+    filter.parameters.lambda = ee.value;
+  });
 
-  $('#diffusion-type').change(filter.setDiffusionType);
+  $('#diffusion-type').change(function(ee) {
+    filter.parameters.diffusion_type = ee.target.value;
+  });
 
   $('#noise-scale-slider').slider({
     precision: 1
   })
-  .on('slide', filter.setNoiseScale);
+  .on('slide', function(ee) {
+    filter.parameters.noise_scale = ee.value;
+  });
 
   $('#feature-scale-slider').slider({
     precision: 1
   })
-  .on('slide', filter.setFeatureScale);
+  .on('slide', function(ee) {
+    filter.parameters.feature_scale = ee.value;
+  });
 
+  $('#execute-button').on('click', filter.execute);
   $(document).keypress(function(press) {
     if(press.which === 13) {
       filter.execute();
@@ -145,7 +111,6 @@ var setUpFilterControls = function () {
 var initialize = function () {
   setUpFilterControls();
   filter.setInputFile('PacMan.png');
-  $('#execute-button').on('click', filter.execute);
 };
 
 $( window ).load( initialize );
