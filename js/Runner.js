@@ -17,6 +17,7 @@ Filter.prototype.execute = function () {
   progress_element.css('width', '0%');
   progress_element.attr('aria-valuenow', '0');
   progress_element.html('Starting...');
+
   var args = ['/Input.png', '/Filtered.png',
     filter.parameters.diffusion_time.toString(),
     filter.parameters.lambda.toString(),
@@ -24,6 +25,7 @@ Filter.prototype.execute = function () {
     filter.parameters.noise_scale.toString(),
     filter.parameters.feature_scale.toString()];
   Module.callMain(args);
+
   var output_data = FS.readFile('/Filtered.png', { encoding: 'binary' });
   var output_img = document.getElementById("output-image");
   try {
@@ -39,6 +41,10 @@ Filter.prototype.execute = function () {
     output_img.src = 'data:image\/png;base64,' + btoa(rawString);
   }
   output_img.style.visibility = 'visible';
+
+  //progress_element.css('width', '0%');
+  //progress_element.attr('aria-valuenow', '0');
+  //progress_element.html('Done.');
 };
 
 
@@ -52,7 +58,10 @@ Filter.prototype.setInputFile = function (file_name) {
   xhr.onload = function() {
     console.log('Installing ' + file_name);
     data = new Uint8Array(xhr.response);
-    FS.writeFile('/Input.png', data, { encoding: 'binary' });
+    FS.writeFile(file_name, data, { encoding: 'binary' });
+    Module.ccall('ConvertAndResample', 'number',
+      ['string', 'string'],
+      [file_name, '/Input.png']);
     Filter.prototype.execute.call(filter);
   };
   xhr.send();
