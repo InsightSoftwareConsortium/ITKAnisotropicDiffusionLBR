@@ -9,12 +9,7 @@ find_package(ITK REQUIRED
   )
 include(${ITK_USE_FILE})
 
-add_executable(CoherenceEnhancingDiffusion
-  CoherenceEnhancingDiffusion.cxx)
-target_link_libraries(CoherenceEnhancingDiffusion
-  ${ITK_LIBRARIES})
-em_link_pre_js(CoherenceEnhancingDiffusion ${CMAKE_CURRENT_SOURCE_DIR}/js/pre.js)
-
+enable_testing()
 
 if(NOT INPUT_DATA_DIR)
   message(SEND_ERROR "INPUT_DATA_DIR not found!")
@@ -28,11 +23,21 @@ set(TEST_OUTPUT_DIR /)
 file(MAKE_DIRECTORY ${AnisotropicDiffusionLBR_Examples_BINARY_DIR}/Input)
 file(COPY ${INPUT_DATA_DIR}/PacMan.png
   DESTINATION ${AnisotropicDiffusionLBR_Examples_BINARY_DIR}/Input)
-set(CMAKE_EXE_LINKER_FLAGS
-  "${CMAKE_EXE_LINKER_FLAGS} --embed-file Input")
 
 
-enable_testing()
+add_executable(CoherenceEnhancingDiffusion
+  CoherenceEnhancingDiffusion.cxx
+  ConvertAndResample.cxx)
+set_target_properties(CoherenceEnhancingDiffusion PROPERTIES LINK_FLAGS
+  "--embed-file Input -s EXPORTED_FUNCTIONS=\"['_main', '_ConvertAndResample']\"")
+get_target_property(flags CoherenceEnhancingDiffusion LINK_FLAGS)
+message("flags: ${flags}")
+target_link_libraries(CoherenceEnhancingDiffusion
+  ${ITK_LIBRARIES})
+em_link_pre_js(CoherenceEnhancingDiffusion ${CMAKE_CURRENT_SOURCE_DIR}/js/pre.js)
+
+
+
 add_test(NAME CoherenceEnhancingDiffusionTest
   COMMAND CoherenceEnhancingDiffusion /Input/PacMan.png
     ${TEST_OUTPUT_DIR}/PacManFiltered.png
