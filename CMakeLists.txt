@@ -6,6 +6,7 @@ find_package(ITK REQUIRED
   COMPONENTS
     AnisotropicDiffusionLBR
     ITKIOPNG
+    ITKImageIntensity
   )
 include(${ITK_USE_FILE})
 
