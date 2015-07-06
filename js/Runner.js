@@ -102,10 +102,7 @@ Runner.Filter.prototype.setInputFile = function (file_name) {
 };
 
 
-Runner.filter = new Runner.Filter();
-
-
-Runner.setUpFilterControls = function () {
+Runner.Filter.prototype.setUpFilterControls = function () {
   $('#diffusion-time-slider').slider({
     scale: 'logarithmic',
     precision: 2
@@ -152,7 +149,8 @@ Runner.setUpFilterControls = function () {
 
 
 Runner.initialize = function () {
-  Runner.setUpFilterControls();
+  Runner.filter = new Runner.Filter();
+  Runner.filter.setUpFilterControls();
   Runner.filter.setInputFile('PacMan.png');
 };
 

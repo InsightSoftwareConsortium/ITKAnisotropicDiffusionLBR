@@ -14,7 +14,7 @@ extern "C"
 /** Convert the input image to a PNG and resample it for display. */
 int ConvertAndResample( char * inputFileName, char * outputFileName )
 {
-  std::cout << "Convert and resampling..." << std::endl;
+  std::cout << "Convert and resample..." << std::endl;
   itk::TimeProbe clock;
   clock.Start();
 
