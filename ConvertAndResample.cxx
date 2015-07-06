@@ -3,6 +3,7 @@
 #include "itkResampleImageFilter.h"
 #include "itkRescaleIntensityImageFilter.h"
 #include "itkNearestNeighborInterpolateImageFunction.h"
+#include "itkTimeProbe.h"
 
 // todo, use neighborhood interpolator
 
@@ -14,6 +15,8 @@ extern "C"
 int ConvertAndResample( char * inputFileName, char * outputFileName )
 {
   std::cout << "Convert and resampling..." << std::endl;
+  itk::TimeProbe clock;
+  clock.Start();
 
   const unsigned int InputDimension = 2;
   const unsigned int OutputDimension = 2;
@@ -82,6 +85,8 @@ int ConvertAndResample( char * inputFileName, char * outputFileName )
     std::cerr << "Error: " << error << std::endl;
     return EXIT_FAILURE;
     }
+  clock.Stop();
+  std::cout << "Conversion took: " << clock.GetMean() << " seconds\n";
 
   return EXIT_SUCCESS;
 }

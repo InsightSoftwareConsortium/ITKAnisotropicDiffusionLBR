@@ -262,7 +262,7 @@ int Execute(int argc, char * argv[])
   clock.Start();
   writer->Update();
   clock.Stop();
-  std::cout << "Took: " << clock.GetMean() << " seconds\n";
+  std::cout << "Filtering took: " << clock.GetMean() << " seconds\n";
 
   return EXIT_SUCCESS;
 }
