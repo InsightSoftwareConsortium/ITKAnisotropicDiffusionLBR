@@ -138,7 +138,9 @@ Runner.Filter.prototype.setUpFilterControls = function () {
     Runner.filter.parameters.feature_scale = ee.value;
   });
 
-  $('#execute-button').on('click', Runner.filter.execute);
+  $('#execute-button').on('click', function() {
+    Runner.filter.execute();
+  });
   $(document).keypress(function(press) {
     if(press.which === 13) {
       Runner.filter.execute();
