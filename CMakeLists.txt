@@ -12,14 +12,10 @@ include(${ITK_USE_FILE})
 
 enable_testing()
 
-if(NOT INPUT_DATA_DIR)
+set(INPUT_DATA_DIR ${ITK_DIR}/ExternalData/Modules/External/ITKAnisotropicDiffusionLBR/test/Input)
+if(NOT EXISTS ${INPUT_DATA_DIR}/PacMan.png)
   message(SEND_ERROR "INPUT_DATA_DIR not found!")
 endif()
-find_path(INPUT_DATA_DIR
-  NAMES PacMan.png
-  HINTS ${ITK_DIR}/ExternalData/Modules/Remote/AnisotropicDiffusionLBR/test/Input
-        ${ITK_DIR}/ExternalData/Modules/External/AnisotropicDiffusionLBR/test/Input
-  )
 set(TEST_OUTPUT_DIR /)
 file(MAKE_DIRECTORY ${AnisotropicDiffusionLBR_Examples_BINARY_DIR}/Input)
 file(COPY ${INPUT_DATA_DIR}/PacMan.png
