@@ -104,6 +104,7 @@ Runner.Filter.prototype.setInputFile = function (file_name) {
 
 Runner.Filter.prototype.setUpFilterControls = function () {
   $('#diffusion-time-slider').slider({
+    value: (Runner.filter.parameters.diffusion_time != undefined) ? Runner.filter.parameters.diffusion_time : 20 ,
     scale: 'logarithmic',
     precision: 2
   })
@@ -146,8 +147,58 @@ Runner.Filter.prototype.setUpFilterControls = function () {
       Runner.filter.execute();
     }
   });
+};
 
-}
+
+Runner.Filter.prototype.setFigure = function(figure, subfigure) {
+  switch(figure) {
+  case 2:
+    switch(subfigure) {
+    case 2:
+      $('#diffusion-time-slider').slider('setValue', 20.0);
+      Runner.filter.parameters.diffusion_time = 20.0;
+      $('#lambda-slider').slider('setValue', 0.05);
+      Runner.filter.parameters.lambda = 0.05;
+      $('#diffusion-type').val('cEED');
+      Runner.filter.parameters.diffusion_type = 'cEED';
+      $('#noise-scale').slider('setValue', 3.0);
+      Runner.filter.parameters.noise_scale = 3.0;
+      $('#feature-scale').slider('setValue', 2.0);
+      Runner.filter.parameters.feature_scale = 2.0;
+      break;
+    case 3:
+      $('#diffusion-time-slider').slider('setValue', 20.0);
+      Runner.filter.parameters.diffusion_time = 20.0;
+      $('#lambda-slider').slider('setValue', 0.05);
+      Runner.filter.parameters.lambda = 0.05;
+      $('#diffusion-type').val('cCED');
+      Runner.filter.parameters.diffusion_type = 'cCED';
+      $('#noise-scale').slider('setValue', 3.0);
+      Runner.filter.parameters.noise_scale = 3.0;
+      $('#feature-scale').slider('setValue', 2.0);
+      Runner.filter.parameters.feature_scale = 2.0;
+      break;
+    case 4:
+      $('#diffusion-time-slider').slider('setValue', 20.0);
+      Runner.filter.parameters.diffusion_time = 20.0;
+      $('#lambda-slider').slider('setValue', 0.05);
+      Runner.filter.parameters.lambda = 0.05;
+      $('#diffusion-type').val('Isotropic');
+      Runner.filter.parameters.diffusion_type = 'Isotropic';
+      $('#noise-scale').slider('setValue', 3.0);
+      Runner.filter.parameters.noise_scale = 3.0;
+      $('#feature-scale').slider('setValue', 2.0);
+      Runner.filter.parameters.feature_scale = 2.0;
+      break;
+    default:
+      console.error('Unknown subfigure: ' + figure);
+    }
+    break;
+  default:
+    console.error('Unknown figure: ' + figure);
+  }
+  Runner.filter.execute();
+};
 
 
 Runner.initialize = function () {
@@ -155,5 +206,7 @@ Runner.initialize = function () {
   Runner.filter.setUpFilterControls();
   Runner.filter.setInputFile('PacMan.png');
 };
+
+
 
 $( window ).load( Runner.initialize );

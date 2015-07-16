@@ -64,6 +64,25 @@
     <div class="row">
       <!-- Article figure presets -->
       <div class="col-md-6">
+        <div class="col-sm-4">
+          <form>
+            <div class="radio">
+              <label><input type="radio" name="figure" onClick="Runner.filter.setFigure(2,2);" checked/>Figure 2.II</label>
+              <label><input type="radio" name="figure" onClick="Runner.filter.setFigure(2,3);"/>Figure 2.III</label>
+              <label><input type="radio" name="figure" onClick="Runner.filter.setFigure(2,4);"/>Figure 2.IV</label>
+            </div>
+          </form>
+          <!--Some text-->
+          <!--<div class="radio">-->
+            <!--<label>-->
+              <!--Some text-->
+              <!--<input type="radio" id="figure2II" value="Figure" /> -->
+            <!--</label>-->
+          <!--<div>-->
+        </div>
+        <!--<div class="col-sm-8">-->
+          <!--Other text-->
+        <!--</div>-->
       </div>
 
       <!-- Controls for execution parameters -->
@@ -94,10 +113,10 @@
             </tr>
             <tr>
               <td>Lambda &nbsp;</td>
-              <td><b>0.05</b> &nbsp; &nbsp;
+              <td><b>0.5</b> &nbsp; &nbsp;
                  <input id="lambda-slider" type="text"
-                 data-slider-min="0.0001" data-slider-max="0.05"
-                 data-slider-step="0.0001" data-slider-value="0.01"
+                 data-slider-min="0.0001" data-slider-max="0.5"
+                 data-slider-step="0.0001" data-slider-value="0.05"
                  style="width: 60%;" />
                  &nbsp; &nbsp; <b>0.0001</b>
               </td>
