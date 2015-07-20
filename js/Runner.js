@@ -45,7 +45,14 @@ Runner.Filter.prototype.execute = function () {
   progress_element.attr('aria-valuenow', '0');
   progress_element.html('Starting...');
 
+  var input_filename = this.parameters.input_filename;
+  var basename = input_filename.substr(0, input_filename.lastIndexOf('.'));
+  var extension = input_filename.substr(input_filename.lastIndexOf('.'));
+  this.parameters.output_filename = basename + 'Filtered' + extension;
+  $('#output-filename').html(this.parameters.output_filename);
+
   var output_filename = '/raw/' + this.parameters.output_filename;
+
   var args = ['/raw/' + this.parameters.input_filename, output_filename,
     this.parameters.diffusion_time.toString(),
     this.parameters.lambda.toString(),
@@ -63,9 +70,9 @@ Runner.Filter.prototype.execute = function () {
   output_img.src = Runner.binaryToPng(output_data);
   output_img.style.visibility = 'visible';
 
-  //progress_element.css('width', '0%');
-  //progress_element.attr('aria-valuenow', '0');
-  //progress_element.html('Done.');
+  progress_element.css('width', '100%');
+  progress_element.attr('aria-valuenow', '100');
+  progress_element.html('Done.');
 };
 
 
@@ -91,14 +98,9 @@ Runner.Filter.prototype.setInputFile = function (file_name) {
     var input_img = document.getElementById("input-image");
     input_img.src = Runner.binaryToPng(input_data);
     input_img.style.visibility = 'visible';
-    that.execute();
+    Runner.filter.execute();
   };
   xhr.send();
-
-  var basename = file_name.substr(0, file_name.lastIndexOf('.'));
-  var extension = file_name.substr(file_name.lastIndexOf('.'));
-  this.parameters.output_filename = basename + 'Filtered' + extension;
-  $('#output-filename').html(this.parameters.output_filename);
 };
 
 
@@ -152,8 +154,10 @@ Runner.Filter.prototype.setUpFilterControls = function () {
 
 Runner.Filter.prototype.setFigure = function(figure, subfigure) {
   switch(figure) {
+  // PacMan
   case 2:
     switch(subfigure) {
+    // cEED
     case 2:
       $('#diffusion-time-slider').slider('setValue', 20.0);
       Runner.filter.parameters.diffusion_time = 20.0;
@@ -166,6 +170,7 @@ Runner.Filter.prototype.setFigure = function(figure, subfigure) {
       $('#feature-scale').slider('setValue', 2.0);
       Runner.filter.parameters.feature_scale = 2.0;
       break;
+    // cCED
     case 3:
       $('#diffusion-time-slider').slider('setValue', 20.0);
       Runner.filter.parameters.diffusion_time = 20.0;
@@ -178,6 +183,7 @@ Runner.Filter.prototype.setFigure = function(figure, subfigure) {
       $('#feature-scale').slider('setValue', 2.0);
       Runner.filter.parameters.feature_scale = 2.0;
       break;
+    // Isotropic
     case 4:
       $('#diffusion-time-slider').slider('setValue', 20.0);
       Runner.filter.parameters.diffusion_time = 20.0;
@@ -193,11 +199,32 @@ Runner.Filter.prototype.setFigure = function(figure, subfigure) {
     default:
       console.error('Unknown subfigure: ' + figure);
     }
+    Runner.filter.setInputFile('PacMan.png');
+    break;
+  // FingerPrint
+  case 3:
+    switch(subfigure) {
+    // cEED
+    case 2:
+      $('#diffusion-time-slider').slider('setValue', 20.0);
+      Runner.filter.parameters.diffusion_time = 20.0;
+      $('#lambda-slider').slider('setValue', 0.02);
+      Runner.filter.parameters.lambda = 0.02;
+      $('#diffusion-type').val('cEED');
+      Runner.filter.parameters.diffusion_type = 'cEED';
+      $('#noise-scale').slider('setValue', 1.0);
+      Runner.filter.parameters.noise_scale = 1.0;
+      $('#feature-scale').slider('setValue', 2.0);
+      Runner.filter.parameters.feature_scale = 2.0;
+      break;
+    default:
+      console.error('Unknown subfigure: ' + figure);
+    }
+    Runner.filter.setInputFile('FingerPrint.png');
     break;
   default:
     console.error('Unknown figure: ' + figure);
   }
-  Runner.filter.execute();
 };
 
 
