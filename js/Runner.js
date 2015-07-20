@@ -74,7 +74,7 @@ Runner.Filter.prototype.setInputFile = function (file_name) {
   $('#input-filename').html(file_name);
   console.log('Downloading ' + file_name);
   xhr = new XMLHttpRequest();
-  xhr.open('GET', file_name);
+  xhr.open('GET', 'images/' + file_name);
   xhr.responseType = 'arraybuffer';
   xhr.overrideMimeType('application/octet-stream');
   var that = this;
