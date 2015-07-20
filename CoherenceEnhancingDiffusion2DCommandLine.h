@@ -176,6 +176,7 @@ int Execute(int argc, char * argv[])
 
   const char * imageFileName = argv[1];
   const char * outputFileName = argv[2];
+
   reader->SetFileName(imageFileName);
 
   typedef CoherenceEnhancingDiffusionFilter<ImageType,ScalarType> DiffusionFilterType;
