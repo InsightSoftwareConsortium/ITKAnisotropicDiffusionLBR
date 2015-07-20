@@ -159,8 +159,8 @@ int Execute(int argc, char * argv[], int nComponents)
       return Execute<Dimension,ScalarType,ScalarType,ComponentType>(argc,argv);
     //case 2:
       //return Execute<Dimension,ScalarType,Vector<ScalarType,2>,Vector<ComponentType,2> >(argc,argv);
-    //case 3:
-      //return Execute<Dimension,ScalarType,Vector<ScalarType,3>,Vector<ComponentType,3> >(argc,argv);
+    case 3:
+      return Execute<Dimension,ScalarType,Vector<ScalarType,3>,Vector<ComponentType,3> >(argc,argv);
     default:
       itkGenericExceptionMacro("Sorry, unsupported number of components");
     }

@@ -248,6 +248,53 @@ Runner.Filter.prototype.setFigure = function(figure, subfigure) {
     }
     Runner.filter.setInputFile('FingerPrint.png');
     break;
+  // Lena
+  case 6:
+    switch(subfigure) {
+    // cEED
+    case 2:
+      $('#diffusion-time-slider').slider('setValue', 2.0);
+      Runner.filter.parameters.diffusion_time = 2.0;
+      $('#lambda-slider').slider('setValue', 0.003);
+      Runner.filter.parameters.lambda = 0.003;
+      $('#diffusion-type').val('cEED');
+      Runner.filter.parameters.diffusion_type = 'cEED';
+      $('#noise-scale').slider('setValue', 1.0);
+      Runner.filter.parameters.noise_scale = 1.0;
+      $('#feature-scale').slider('setValue', 2.0);
+      Runner.filter.parameters.feature_scale = 2.0;
+      break;
+    // cCED
+    case 3:
+      $('#diffusion-time-slider').slider('setValue', 2.0);
+      Runner.filter.parameters.diffusion_time = 2.0;
+      $('#lambda-slider').slider('setValue', 0.003);
+      Runner.filter.parameters.lambda = 0.003;
+      $('#diffusion-type').val('cCED');
+      Runner.filter.parameters.diffusion_type = 'cCED';
+      $('#noise-scale').slider('setValue', 1.0);
+      Runner.filter.parameters.noise_scale = 1.0;
+      $('#feature-scale').slider('setValue', 2.0);
+      Runner.filter.parameters.feature_scale = 2.0;
+      break;
+    // Isotropic
+    case 4:
+      $('#diffusion-time-slider').slider('setValue', 2.0);
+      Runner.filter.parameters.diffusion_time = 2.0;
+      $('#lambda-slider').slider('setValue', 0.003);
+      Runner.filter.parameters.lambda = 0.003;
+      $('#diffusion-type').val('Isotropic');
+      Runner.filter.parameters.diffusion_type = 'Isotropic';
+      $('#noise-scale').slider('setValue', 1.0);
+      Runner.filter.parameters.noise_scale = 1.0;
+      $('#feature-scale').slider('setValue', 2.0);
+      Runner.filter.parameters.feature_scale = 2.0;
+      break;
+    default:
+      console.error('Unknown subfigure: ' + figure);
+    }
+    Runner.filter.setInputFile('Lena_Detail.png');
+    break;
   default:
     console.error('Unknown figure: ' + figure);
   }
