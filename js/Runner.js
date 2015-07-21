@@ -295,6 +295,69 @@ Runner.Filter.prototype.setFigure = function(figure, subfigure) {
     }
     Runner.filter.setInputFile('Lena_Detail.png');
     break;
+  // Oscillations and Triangle
+  case 8:
+    switch(subfigure) {
+    // Oscillations cCED
+    case 2:
+      $('#diffusion-time-slider').slider('setValue', 5.0);
+      Runner.filter.parameters.diffusion_time = 5.0;
+      $('#lambda-slider').slider('setValue', 0.03);
+      Runner.filter.parameters.lambda = 0.03;
+      $('#diffusion-type').val('cCED');
+      Runner.filter.parameters.diffusion_type = 'cCED';
+      $('#noise-scale').slider('setValue', 1.0);
+      Runner.filter.parameters.noise_scale = 1.0;
+      $('#feature-scale').slider('setValue', 2.0);
+      Runner.filter.parameters.feature_scale = 2.0;
+      Runner.filter.setInputFile('Oscillations_Noisy.png');
+      break;
+    // Oscillations CED
+    case 3:
+      $('#diffusion-time-slider').slider('setValue', 5.0);
+      Runner.filter.parameters.diffusion_time = 5.0;
+      $('#lambda-slider').slider('setValue', 0.03);
+      Runner.filter.parameters.lambda = 0.03;
+      $('#diffusion-type').val('CED');
+      Runner.filter.parameters.diffusion_type = 'CED';
+      $('#noise-scale').slider('setValue', 1.0);
+      Runner.filter.parameters.noise_scale = 1.0;
+      $('#feature-scale').slider('setValue', 2.0);
+      Runner.filter.parameters.feature_scale = 2.0;
+      Runner.filter.setInputFile('Oscillations_Noisy.png');
+      break;
+    // Triangle cCED
+    case 5:
+      $('#diffusion-time-slider').slider('setValue', 20.0);
+      Runner.filter.parameters.diffusion_time = 20.0;
+      $('#lambda-slider').slider('setValue', 0.05);
+      Runner.filter.parameters.lambda = 0.05;
+      $('#diffusion-type').val('cEED');
+      Runner.filter.parameters.diffusion_type = 'cEED';
+      $('#noise-scale').slider('setValue', 1.0);
+      Runner.filter.parameters.noise_scale = 1.0;
+      $('#feature-scale').slider('setValue', 2.0);
+      Runner.filter.parameters.feature_scale = 2.0;
+      Runner.filter.setInputFile('Triangle.png');
+      break;
+    // Triangle CED
+    case 6:
+      $('#diffusion-time-slider').slider('setValue', 20.0);
+      Runner.filter.parameters.diffusion_time = 20.0;
+      $('#lambda-slider').slider('setValue', 0.05);
+      Runner.filter.parameters.lambda = 0.05;
+      $('#diffusion-type').val('EED');
+      Runner.filter.parameters.diffusion_type = 'EED';
+      $('#noise-scale').slider('setValue', 1.0);
+      Runner.filter.parameters.noise_scale = 1.0;
+      $('#feature-scale').slider('setValue', 2.0);
+      Runner.filter.parameters.feature_scale = 2.0;
+      Runner.filter.setInputFile('Triangle.png');
+      break;
+    default:
+      console.error('Unknown subfigure: ' + figure);
+    }
+    break;
   default:
     console.error('Unknown figure: ' + figure);
   }
