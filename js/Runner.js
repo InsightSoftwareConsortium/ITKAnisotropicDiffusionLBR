@@ -29,7 +29,8 @@ Runner.Filter = function () {
     lambda: 0.05,
     diffusion_type: 'cEED',
     noise_scale: 3.0,
-    feature_scale: 2.0 };
+    feature_scale: 2.0,
+    exponent: 2.0 };
 
   // Where to put the raw input and output images.
   FS.mkdir('/raw');
@@ -58,7 +59,8 @@ Runner.Filter.prototype.execute = function () {
     this.parameters.lambda.toString(),
     this.parameters.diffusion_type,
     this.parameters.noise_scale.toString(),
-    this.parameters.feature_scale.toString()];
+    this.parameters.feature_scale.toString(),
+    this.parameters.exponent.toString()];
   Module.callMain(args);
 
   var output_display_filename = '/display/Output.png';
@@ -141,6 +143,13 @@ Runner.Filter.prototype.setUpFilterControls = function () {
     Runner.filter.parameters.feature_scale = ee.value;
   });
 
+  $('#exponent-slider').slider({
+    precision: 1
+  })
+  .on('slide', function(ee) {
+    Runner.filter.parameters.exponent = ee.value;
+  });
+
   $('#execute-button').on('click', function() {
     Runner.filter.execute();
   });
@@ -169,6 +178,8 @@ Runner.Filter.prototype.setFigure = function(figure, subfigure) {
       Runner.filter.parameters.noise_scale = 3.0;
       $('#feature-scale').slider('setValue', 2.0);
       Runner.filter.parameters.feature_scale = 2.0;
+      $('#exponent-slider').slider('setValue', 2.0);
+      Runner.filter.parameters.exponent = 2.0;
       break;
     // cCED
     case 3:
@@ -182,6 +193,8 @@ Runner.Filter.prototype.setFigure = function(figure, subfigure) {
       Runner.filter.parameters.noise_scale = 3.0;
       $('#feature-scale').slider('setValue', 2.0);
       Runner.filter.parameters.feature_scale = 2.0;
+      $('#exponent-slider').slider('setValue', 2.0);
+      Runner.filter.parameters.exponent = 2.0;
       break;
     // Isotropic
     case 4:
@@ -195,6 +208,8 @@ Runner.Filter.prototype.setFigure = function(figure, subfigure) {
       Runner.filter.parameters.noise_scale = 3.0;
       $('#feature-scale').slider('setValue', 2.0);
       Runner.filter.parameters.feature_scale = 2.0;
+      $('#exponent-slider').slider('setValue', 2.0);
+      Runner.filter.parameters.exponent = 2.0;
       break;
     default:
       console.error('Unknown subfigure: ' + figure);
@@ -216,6 +231,8 @@ Runner.Filter.prototype.setFigure = function(figure, subfigure) {
       Runner.filter.parameters.noise_scale = 1.0;
       $('#feature-scale').slider('setValue', 2.0);
       Runner.filter.parameters.feature_scale = 2.0;
+      $('#exponent-slider').slider('setValue', 2.0);
+      Runner.filter.parameters.exponent = 2.0;
       break;
     // cCED
     case 3:
@@ -229,6 +246,8 @@ Runner.Filter.prototype.setFigure = function(figure, subfigure) {
       Runner.filter.parameters.noise_scale = 1.0;
       $('#feature-scale').slider('setValue', 2.0);
       Runner.filter.parameters.feature_scale = 2.0;
+      $('#exponent-slider').slider('setValue', 2.0);
+      Runner.filter.parameters.exponent = 2.0;
       break;
     // Isotropic
     case 4:
@@ -242,6 +261,8 @@ Runner.Filter.prototype.setFigure = function(figure, subfigure) {
       Runner.filter.parameters.noise_scale = 1.0;
       $('#feature-scale').slider('setValue', 2.0);
       Runner.filter.parameters.feature_scale = 2.0;
+      $('#exponent-slider').slider('setValue', 2.0);
+      Runner.filter.parameters.exponent = 2.0;
       break;
     default:
       console.error('Unknown subfigure: ' + figure);
@@ -263,6 +284,8 @@ Runner.Filter.prototype.setFigure = function(figure, subfigure) {
       Runner.filter.parameters.noise_scale = 1.0;
       $('#feature-scale').slider('setValue', 2.0);
       Runner.filter.parameters.feature_scale = 2.0;
+      $('#exponent-slider').slider('setValue', 4.0);
+      Runner.filter.parameters.exponent = 4.0;
       break;
     // cCED
     case 3:
@@ -276,6 +299,8 @@ Runner.Filter.prototype.setFigure = function(figure, subfigure) {
       Runner.filter.parameters.noise_scale = 1.0;
       $('#feature-scale').slider('setValue', 2.0);
       Runner.filter.parameters.feature_scale = 2.0;
+      $('#exponent-slider').slider('setValue', 4.0);
+      Runner.filter.parameters.exponent = 4.0;
       break;
     // Isotropic
     case 4:
@@ -289,6 +314,8 @@ Runner.Filter.prototype.setFigure = function(figure, subfigure) {
       Runner.filter.parameters.noise_scale = 1.0;
       $('#feature-scale').slider('setValue', 2.0);
       Runner.filter.parameters.feature_scale = 2.0;
+      $('#exponent-slider').slider('setValue', 4.0);
+      Runner.filter.parameters.exponent = 4.0;
       break;
     default:
       console.error('Unknown subfigure: ' + figure);
@@ -300,8 +327,8 @@ Runner.Filter.prototype.setFigure = function(figure, subfigure) {
     switch(subfigure) {
     // Oscillations cCED
     case 2:
-      $('#diffusion-time-slider').slider('setValue', 5.0);
-      Runner.filter.parameters.diffusion_time = 5.0;
+      $('#diffusion-time-slider').slider('setValue', 20.0);
+      Runner.filter.parameters.diffusion_time = 20.0;
       $('#lambda-slider').slider('setValue', 0.03);
       Runner.filter.parameters.lambda = 0.03;
       $('#diffusion-type').val('cCED');
@@ -310,12 +337,14 @@ Runner.Filter.prototype.setFigure = function(figure, subfigure) {
       Runner.filter.parameters.noise_scale = 1.0;
       $('#feature-scale').slider('setValue', 2.0);
       Runner.filter.parameters.feature_scale = 2.0;
+      $('#exponent-slider').slider('setValue', 2.0);
+      Runner.filter.parameters.exponent = 2.0;
       Runner.filter.setInputFile('Oscillations_Noisy.png');
       break;
     // Oscillations CED
     case 3:
-      $('#diffusion-time-slider').slider('setValue', 5.0);
-      Runner.filter.parameters.diffusion_time = 5.0;
+      $('#diffusion-time-slider').slider('setValue', 20.0);
+      Runner.filter.parameters.diffusion_time = 20.0;
       $('#lambda-slider').slider('setValue', 0.03);
       Runner.filter.parameters.lambda = 0.03;
       $('#diffusion-type').val('CED');
@@ -324,12 +353,14 @@ Runner.Filter.prototype.setFigure = function(figure, subfigure) {
       Runner.filter.parameters.noise_scale = 1.0;
       $('#feature-scale').slider('setValue', 2.0);
       Runner.filter.parameters.feature_scale = 2.0;
+      $('#exponent-slider').slider('setValue', 2.0);
+      Runner.filter.parameters.exponent = 2.0;
       Runner.filter.setInputFile('Oscillations_Noisy.png');
       break;
     // Triangle cCED
     case 5:
-      $('#diffusion-time-slider').slider('setValue', 20.0);
-      Runner.filter.parameters.diffusion_time = 20.0;
+      $('#diffusion-time-slider').slider('setValue', 5.0);
+      Runner.filter.parameters.diffusion_time = 5.0;
       $('#lambda-slider').slider('setValue', 0.05);
       Runner.filter.parameters.lambda = 0.05;
       $('#diffusion-type').val('cEED');
@@ -338,12 +369,14 @@ Runner.Filter.prototype.setFigure = function(figure, subfigure) {
       Runner.filter.parameters.noise_scale = 1.0;
       $('#feature-scale').slider('setValue', 2.0);
       Runner.filter.parameters.feature_scale = 2.0;
+      $('#exponent-slider').slider('setValue', 2.0);
+      Runner.filter.parameters.exponent = 2.0;
       Runner.filter.setInputFile('Triangle.png');
       break;
     // Triangle CED
     case 6:
-      $('#diffusion-time-slider').slider('setValue', 20.0);
-      Runner.filter.parameters.diffusion_time = 20.0;
+      $('#diffusion-time-slider').slider('setValue', 5.0);
+      Runner.filter.parameters.diffusion_time = 5.0;
       $('#lambda-slider').slider('setValue', 0.05);
       Runner.filter.parameters.lambda = 0.05;
       $('#diffusion-type').val('EED');
@@ -352,6 +385,8 @@ Runner.Filter.prototype.setFigure = function(figure, subfigure) {
       Runner.filter.parameters.noise_scale = 1.0;
       $('#feature-scale').slider('setValue', 2.0);
       Runner.filter.parameters.feature_scale = 2.0;
+      $('#exponent-slider').slider('setValue', 2.0);
+      Runner.filter.parameters.exponent = 2.0;
       Runner.filter.setInputFile('Triangle.png');
       break;
     default:
