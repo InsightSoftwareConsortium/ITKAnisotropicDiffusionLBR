@@ -51,7 +51,7 @@ int ConvertAndResample( char * inputFileName, char * outputFileName )
   typename InputImageType::SpacingType outputSpacing;
   typename InputImageType::SizeType outputSize;
   outputSize[1] = width;
-  outputSpacing[1] = ( inputSpacing[1] * inputSize[0] ) / outputSize[1];
+  outputSpacing[1] = ( inputSpacing[1] * inputSize[1] ) / outputSize[1];
   outputSpacing[0] = outputSpacing[1];
   outputSize[0] = ( inputSpacing[0] * inputSize[0] ) / outputSpacing[0];
   resampler->SetSize( outputSize );
