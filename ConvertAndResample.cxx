@@ -5,6 +5,7 @@
 #include "itkNearestNeighborInterpolateImageFunction.h"
 #include "itkTimeProbe.h"
 #include "itkRGBPixel.h"
+#include "itkRGBAPixel.h"
 #include "itkPNGImageIOFactory.h"
 
 /** Convert the input image to a PNG and resample it for display. */
@@ -117,8 +118,11 @@ int ConvertAndResample( char * inputFileName, char * outputFileName )
       return ConvertAndResample< unsigned char >( inputFileName, outputFileName );
     case 3:
       return ConvertAndResample< itk::RGBPixel< unsigned char > >( inputFileName, outputFileName );
+    case 4:
+      return ConvertAndResample< itk::RGBAPixel< unsigned char > >( inputFileName, outputFileName );
     default:
-      itkGenericExceptionMacro("Sorry, unsupported number of components.");
+      std::cerr << "Sorry, unsupported number of components." << std::endl;
+      return EXIT_FAILURE;
     }
 }
 

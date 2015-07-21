@@ -45,6 +45,8 @@
           <div class="panel-body">
             <div id="input-filename">PacMan.png</div>
           </div>
+          <input type="file" id="file-input" name="files[]" disabled
+          onchange="Runner.filter.setInputFile(this.files[0])" accept="image/png"/>
         </div>
       </div>
       <div class="col-sm-6">
@@ -224,7 +226,7 @@
             </tr>
             <tr>
               <td>Exponent &nbsp;</td>
-              <td><b>2.0</b> &nbsp; &nbsp;
+              <td><b>1.0</b> &nbsp; &nbsp;
                  <input id="exponent-slider" type="text"
                  data-slider-min="1.0" data-slider-max="6.0"
                  data-slider-step="0.5" data-slider-value="2.0" />

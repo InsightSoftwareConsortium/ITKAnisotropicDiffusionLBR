@@ -78,31 +78,70 @@ Runner.Filter.prototype.execute = function () {
 };
 
 
-Runner.Filter.prototype.setInputFile = function (file_name) {
-  this.parameters.input_filename = file_name;
-  $('#input-filename').html(file_name);
-  console.log('Downloading ' + file_name);
-  xhr = new XMLHttpRequest();
-  xhr.open('GET', 'images/' + file_name);
-  xhr.responseType = 'arraybuffer';
-  xhr.overrideMimeType('application/octet-stream');
-  var that = this;
-  xhr.onload = function() {
-    console.log('Installing ' + file_name);
-    data = new Uint8Array(xhr.response);
-    var input_filename = '/raw/' + file_name;
-    var input_display_filename = '/display/Input.png';
-    FS.writeFile(input_filename, data, { encoding: 'binary' });
-    Module.ccall('ConvertAndResample', 'number',
-      ['string', 'string'],
-      [input_filename, input_display_filename]);
-    var input_data = FS.readFile(input_display_filename, { encoding: 'binary' });
+Runner.Filter.prototype.setInputFile = function (input_file) {
+  var input_filename = input_file;
+  if(typeof input_file === 'object') {
+    input_filename = input_file.name;
+  }
+  else {
+  }
+  this.parameters.input_filename = input_filename;
+  $('#input-filename').html(input_filename);
+
+  var input_filepath = '/raw/' + input_filename;
+  var input_display_filepath = '/display/Input.png';
+  // Re-use the file it has already been downloaded.
+  try {
+    FS.stat(input_filepath);
+    var input_data = FS.readFile(input_display_filepath, { encoding: 'binary' });
     var input_img = document.getElementById("input-image");
     input_img.src = Runner.binaryToPng(input_data);
     input_img.style.visibility = 'visible';
     Runner.filter.execute();
-  };
-  xhr.send();
+  }
+  catch(err) {
+    if(typeof input_file === 'string') {
+      console.log('Downloading ' + input_filename);
+      xhr = new XMLHttpRequest();
+      xhr.open('GET', 'images/' + input_filename);
+      xhr.responseType = 'arraybuffer';
+      xhr.overrideMimeType('application/octet-stream');
+      var that = this;
+      xhr.onload = function() {
+        console.log('Installing ' + input_filename);
+        var data = new Uint8Array(xhr.response);
+        FS.writeFile(input_filepath, data, { encoding: 'binary' });
+        Module.ccall('ConvertAndResample', 'number',
+          ['string', 'string'],
+          [input_filepath, input_display_filepath]);
+        var input_data = FS.readFile(input_display_filepath, { encoding: 'binary' });
+        var input_img = document.getElementById("input-image");
+        input_img.src = Runner.binaryToPng(input_data);
+        input_img.style.visibility = 'visible';
+        Runner.filter.execute();
+      };
+      xhr.send();
+    }
+    else { // A File object
+      var reader = new FileReader();
+      reader.onload = (function(file) {
+        return function(e) {
+          var data = new Uint8Array(e.target.result);
+          FS.writeFile(input_filepath, data, { encoding: 'binary' });
+          Module.ccall('ConvertAndResample', 'number',
+            ['string', 'string'],
+            [input_filepath, input_display_filepath]);
+          var input_data = FS.readFile(input_display_filepath, { encoding: 'binary' });
+          var input_img = document.getElementById("input-image");
+          input_img.src = Runner.binaryToPng(input_data);
+          input_img.style.visibility = 'visible';
+          Runner.filter.execute();
+        }
+      })(input_file);
+      reader.readAsArrayBuffer(input_file);
+    }
+  }
+
 };
 
 
@@ -149,6 +188,11 @@ Runner.Filter.prototype.setUpFilterControls = function () {
   .on('slide', function(ee) {
     Runner.filter.parameters.exponent = ee.value;
   });
+
+  if(window.File && window.FileReader && window.FileList && window.Blob) {
+    file_input = $('#file-input');
+    file_input[0].disabled = "";
+  }
 
   $('#execute-button').on('click', function() {
     Runner.filter.execute();
