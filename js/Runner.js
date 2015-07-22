@@ -145,6 +145,15 @@ Runner.Filter.prototype.setInputFile = function (input_file) {
 };
 
 
+Runner.Filter.prototype.downloadOutput = function() {
+  var output_path = '/raw/' + this.parameters.output_filename;
+  var data = FS.readFile(output_path, { encoding: 'binary' });
+  var blob = new Blob([data], {"type": "image\/png"});
+  // From FileSaver
+  saveAs(blob, this.parameters.output_filename);
+};
+
+
 Runner.Filter.prototype.setUpFilterControls = function () {
   $('#diffusion-time-slider').slider({
     value: (Runner.filter.parameters.diffusion_time != undefined) ? Runner.filter.parameters.diffusion_time : 20 ,
@@ -193,6 +202,12 @@ Runner.Filter.prototype.setUpFilterControls = function () {
     file_input = $('#file-input');
     file_input[0].disabled = "";
   }
+
+  $('#download').submit(function(e) {
+    e.preventDefault();
+    Runner.filter.downloadOutput();
+    return false;
+  });
 
   $('#execute-button').on('click', function() {
     Runner.filter.execute();
