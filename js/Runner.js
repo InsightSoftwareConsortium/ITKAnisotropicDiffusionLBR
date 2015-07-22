@@ -37,6 +37,12 @@ Runner.Filter = function () {
 
   // Where to put the images for display on the webpage
   FS.mkdir('/display');
+
+  if(typeof window.Worker === "function") {
+    this.worker = new Worker("js/FilterWorker.js");
+  } else {
+    this.worker = null;
+  }
 };
 
 
@@ -82,12 +88,18 @@ Runner.Filter.prototype.execute = function () {
 };
 
 
+Runner.Filter.prototype.displayInput = function (filepath) {
+  var input_data = FS.readFile(filepath, { encoding: 'binary' });
+  var input_img = document.getElementById("input-image");
+  input_img.src = Runner.binaryToPng(input_data);
+  input_img.style.visibility = 'visible';
+};
+
+
 Runner.Filter.prototype.setInputFile = function (input_file) {
   var input_filename = input_file;
   if(typeof input_file === 'object') {
     input_filename = input_file.name;
-  }
-  else {
   }
   this.parameters.input_filename = input_filename;
   $('#input-filename').html(input_filename);
@@ -97,10 +109,7 @@ Runner.Filter.prototype.setInputFile = function (input_file) {
   // Re-use the file it has already been downloaded.
   try {
     FS.stat(input_filepath);
-    var input_data = FS.readFile(input_display_filepath, { encoding: 'binary' });
-    var input_img = document.getElementById("input-image");
-    input_img.src = Runner.binaryToPng(input_data);
-    input_img.style.visibility = 'visible';
+    this.displayInput(input_display_filepath);
     Runner.filter.execute();
   }
   catch(err) {
@@ -118,16 +127,14 @@ Runner.Filter.prototype.setInputFile = function (input_file) {
         Module.ccall('ConvertAndResample', 'number',
           ['string', 'string'],
           [input_filepath, input_display_filepath]);
-        var input_data = FS.readFile(input_display_filepath, { encoding: 'binary' });
-        var input_img = document.getElementById("input-image");
-        input_img.src = Runner.binaryToPng(input_data);
-        input_img.style.visibility = 'visible';
+        that.displayInput(input_display_filepath);
         Runner.filter.execute();
       };
       xhr.send();
     }
     else { // A File object
       var reader = new FileReader();
+      var that = this;
       reader.onload = (function(file) {
         return function(e) {
           var data = new Uint8Array(e.target.result);
@@ -135,17 +142,13 @@ Runner.Filter.prototype.setInputFile = function (input_file) {
           Module.ccall('ConvertAndResample', 'number',
             ['string', 'string'],
             [input_filepath, input_display_filepath]);
-          var input_data = FS.readFile(input_display_filepath, { encoding: 'binary' });
-          var input_img = document.getElementById("input-image");
-          input_img.src = Runner.binaryToPng(input_data);
-          input_img.style.visibility = 'visible';
+          that.displayInput(input_display_filepath);
           Runner.filter.execute();
         }
       })(input_file);
       reader.readAsArrayBuffer(input_file);
     }
   }
-
 };
 
 
