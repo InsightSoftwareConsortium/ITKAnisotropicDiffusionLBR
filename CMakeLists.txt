@@ -26,7 +26,7 @@ add_executable(CoherenceEnhancingDiffusion
   CoherenceEnhancingDiffusion.cxx
   ConvertAndResample.cxx)
 set_target_properties(CoherenceEnhancingDiffusion PROPERTIES LINK_FLAGS
-  "--embed-file Input -s EXPORTED_FUNCTIONS=\"['_main', '_ConvertAndResample']\"")
+  "--embed-file Input -s INVOKE_RUN=0 -s EXPORTED_FUNCTIONS=\"['_main', '_ConvertAndResample']\"")
 target_link_libraries(CoherenceEnhancingDiffusion
   ${ITK_LIBRARIES})
 em_link_pre_js(CoherenceEnhancingDiffusion ${CMAKE_CURRENT_SOURCE_DIR}/js/pre.js)

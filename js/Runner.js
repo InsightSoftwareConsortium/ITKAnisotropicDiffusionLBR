@@ -128,7 +128,14 @@ Runner.Filter.prototype.setInputFile = function (input_file) {
           ['string', 'string'],
           [input_filepath, input_display_filepath]);
         that.displayInput(input_display_filepath);
-        Runner.filter.execute();
+        if(that.worker) {
+          that.worker.postMessage({'cmd': 'install_input',
+            'input_filepath': input_filepath,
+            'data': data});
+        }
+        else {
+          Runner.filter.execute();
+        }
       };
       xhr.send();
     }
@@ -143,7 +150,14 @@ Runner.Filter.prototype.setInputFile = function (input_file) {
             ['string', 'string'],
             [input_filepath, input_display_filepath]);
           that.displayInput(input_display_filepath);
-          Runner.filter.execute();
+          if(that.worker) {
+            that.worker.postMessage({'cmd': 'install_input',
+              'input_filepath': input_filepath,
+              'data': data});
+          }
+          else {
+            Runner.filter.execute();
+          }
         }
       })(input_file);
       reader.readAsArrayBuffer(input_file);
@@ -224,6 +238,21 @@ Runner.Filter.prototype.setUpFilterControls = function () {
       Runner.filter.execute();
     }
   });
+
+
+  if(Runner.filter.worker) {
+    Runner.filter.worker.addEventListener('message', function(e) {
+      if(e.data.cmd !== undefined) {
+        switch(e.data.cmd) {
+        case 'execute':
+          Runner.filter.execute();
+          break;
+        default:
+          console.error('Unknown message received from worker');
+        }
+      }
+    }, false);
+  }
 };
 
 
