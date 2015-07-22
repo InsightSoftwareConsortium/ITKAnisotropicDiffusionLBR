@@ -89,7 +89,7 @@ Runner.Filter.prototype.setInputFile = function (input_file) {
   $('#input-filename').html(input_filename);
 
   var input_filepath = '/raw/' + input_filename;
-  var input_display_filepath = '/display/Input.png';
+  var input_display_filepath = '/display/' + input_filename + '.png';
   // Re-use the file it has already been downloaded.
   try {
     FS.stat(input_filepath);
