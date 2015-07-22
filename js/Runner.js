@@ -41,7 +41,9 @@ Runner.Filter = function () {
 
 
 Runner.Filter.prototype.execute = function () {
-  progress_element = jQuery('#execution-progress');
+  var progress_element = $('#execution-progress');
+  progress_element.toggleClass('progress-bar-striped');
+  progress_element.toggleClass('active');
   progress_element.css('width', '0%');
   progress_element.attr('aria-valuenow', '0');
   progress_element.html('Starting...');
@@ -74,6 +76,8 @@ Runner.Filter.prototype.execute = function () {
 
   progress_element.css('width', '100%');
   progress_element.attr('aria-valuenow', '100');
+  progress_element.toggleClass('progress-bar-striped');
+  progress_element.toggleClass('active');
   progress_element.html('Done.');
 };
 
