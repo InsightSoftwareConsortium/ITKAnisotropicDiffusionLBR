@@ -163,22 +163,9 @@
         </form>
     </div></div></div>
 
-      <!-- Controls for execution parameters -->
       <div class="col-md-6">
-        <!-- Execution progress bar -->
-        <div class="panel panel-info">
-          <div class="panel-heading">Execution</div>
-          <div class="panel-body">
-            <div class="progress">
-              <div class="progress-bar" role="progressbar"
-                   aria-valuenow="0" arias-valuemin="0" aria-valuemax="100"
-                   style="width: 0%;" id="execution-progress">
-              </div>
-            </div>
-            <button id="execute-button" class="btn btn-primary btn-lg"
-              style="float: right;" data-toggle="tooltip" data-placement="bottom"
-            title="Click or press Enter">Execute</button>
-        </div>
+        <!-- Controls for execution parameters -->
+        <div class="panel panel-info"> <div class="panel-heading">Parameters</div><div class="panel-body">
         <!-- Diffusion time -->
         <div class="well">
           <table class="table">
@@ -240,8 +227,23 @@
             </tr>
           </table>
         </div>
+        </div></div>
 
+        <!-- Execution progress bar -->
+        <div class="panel panel-info">
+          <div class="panel-heading">Execution</div>
+          <div class="panel-body">
+            <div class="progress">
+              <div class="progress-bar" role="progressbar"
+                   aria-valuenow="0" arias-valuemin="0" aria-valuemax="100"
+                   style="width: 0%;" id="execution-progress">
+              </div>
+            </div>
+            <button id="execute-button" class="btn btn-primary btn-lg"
+              style="float: right;" data-toggle="tooltip" data-placement="bottom"
+            title="Click or press Enter">Execute</button>
           </div>
+        </div>
       </div>
 
     </div>
