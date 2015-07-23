@@ -46,6 +46,26 @@ Runner.Filter = function () {
 };
 
 
+Runner.Filter.prototype.postExecute = function () {
+  var output_display_filename = '/display/Output.png';
+  var output_filename = '/raw/' + this.parameters.output_filename;
+  Module.ccall('ConvertAndResample', 'number',
+    ['string', 'string'],
+    [output_filename, output_display_filename]);
+  var output_data = FS.readFile(output_display_filename, { encoding: 'binary' });
+  var output_img = document.getElementById("output-image");
+  output_img.src = Runner.binaryToPng(output_data);
+  output_img.style.visibility = 'visible';
+
+  var progress_element = $('#execution-progress');
+  progress_element.css('width', '100%');
+  progress_element.attr('aria-valuenow', '100');
+  progress_element.toggleClass('progress-bar-striped');
+  progress_element.toggleClass('active');
+  progress_element.html('Done.');
+};
+
+
 Runner.Filter.prototype.execute = function () {
   var progress_element = $('#execution-progress');
   progress_element.toggleClass('progress-bar-striped');
@@ -62,29 +82,21 @@ Runner.Filter.prototype.execute = function () {
 
   var output_filename = '/raw/' + this.parameters.output_filename;
 
-  var args = ['/raw/' + this.parameters.input_filename, output_filename,
+  var args = ['/raw/' + this.parameters.input_filename,
+    output_filename,
     this.parameters.diffusion_time.toString(),
     this.parameters.lambda.toString(),
     this.parameters.diffusion_type,
     this.parameters.noise_scale.toString(),
     this.parameters.feature_scale.toString(),
     this.parameters.exponent.toString()];
-  Module.callMain(args);
-
-  var output_display_filename = '/display/Output.png';
-  Module.ccall('ConvertAndResample', 'number',
-    ['string', 'string'],
-    [output_filename, output_display_filename]);
-  var output_data = FS.readFile(output_display_filename, { encoding: 'binary' });
-  var output_img = document.getElementById("output-image");
-  output_img.src = Runner.binaryToPng(output_data);
-  output_img.style.visibility = 'visible';
-
-  progress_element.css('width', '100%');
-  progress_element.attr('aria-valuenow', '100');
-  progress_element.toggleClass('progress-bar-striped');
-  progress_element.toggleClass('active');
-  progress_element.html('Done.');
+  if(this.worker) {
+    this.worker.postMessage({'cmd': 'run_filter', 'parameters': this.parameters});
+  }
+  else {
+    Module.callMain(args);
+    this.postExecute();
+  }
 };
 
 
@@ -110,7 +122,12 @@ Runner.Filter.prototype.setInputFile = function (input_file) {
   try {
     FS.stat(input_filepath);
     this.displayInput(input_display_filepath);
-    Runner.filter.execute();
+    if(this.worker) {
+      this.worker.postMessage({'cmd': 'run_filter', 'parameters': this.parameters});
+    }
+    else {
+      Runner.filter.execute();
+    }
   }
   catch(err) {
     if(typeof input_file === 'string') {
@@ -250,6 +267,11 @@ Runner.Filter.prototype.setUpFilterControls = function () {
         default:
           console.error('Unknown message received from worker');
         }
+      }
+      else { // Returning processed output image data
+        var output_filename = '/raw/' + Runner.filter.parameters.output_filename;
+        FS.writeFile(output_filename, e.data.output_data, { encoding: 'binary' });
+        Runner.filter.postExecute();
       }
     }, false);
   }
