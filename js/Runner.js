@@ -46,6 +46,15 @@ Runner.Filter = function () {
 };
 
 
+Runner.Filter.prototype.setProgress = function(progress) {
+  var progress_element = $('#execution-progress');
+  var progress_str = progress.toString();
+  progress_element.css('width', progress_str + '%');
+  progress_element.attr('aria-valuenow', progress_str);
+  progress_element.html(progress_str + '%');
+};
+
+
 Runner.Filter.prototype.postExecute = function () {
   var output_display_filename = '/display/Output.png';
   var output_filename = '/raw/' + this.parameters.output_filename;
@@ -58,20 +67,16 @@ Runner.Filter.prototype.postExecute = function () {
   output_img.style.visibility = 'visible';
 
   var progress_element = $('#execution-progress');
-  progress_element.css('width', '100%');
-  progress_element.attr('aria-valuenow', '100');
-  progress_element.toggleClass('progress-bar-striped');
-  progress_element.toggleClass('active');
+  this.setProgress(0);
+  progress_element.removeClass('progress-bar-striped active');
   progress_element.html('Done.');
 };
 
 
 Runner.Filter.prototype.execute = function () {
   var progress_element = $('#execution-progress');
-  progress_element.toggleClass('progress-bar-striped');
-  progress_element.toggleClass('active');
-  progress_element.css('width', '0%');
-  progress_element.attr('aria-valuenow', '0');
+  this.setProgress(0);
+  progress_element.addClass('progress-bar-striped active');
   progress_element.html('Starting...');
 
   var input_filename = this.parameters.input_filename;
@@ -263,6 +268,9 @@ Runner.Filter.prototype.setUpFilterControls = function () {
         switch(e.data.cmd) {
         case 'execute':
           Runner.filter.execute();
+          break;
+        case 'set_progress':
+          Runner.filter.setProgress(e.data.progress);
           break;
         default:
           console.error('Unknown message received from worker');
