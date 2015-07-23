@@ -166,7 +166,7 @@
       <!-- Controls for execution parameters -->
       <div class="col-md-6">
         <!-- Execution progress bar -->
-        <div class="panel panel-default">
+        <div class="panel panel-info">
           <div class="panel-heading">Execution</div>
           <div class="panel-body">
             <div class="progress">
@@ -175,7 +175,9 @@
                    style="width: 0%;" id="execution-progress">
               </div>
             </div>
-          </div>
+            <button id="execute-button" class="btn btn-primary btn-lg"
+              style="float: right;" data-toggle="tooltip" data-placement="bottom"
+            title="Click or press Enter">Execute</button>
         </div>
         <!-- Diffusion time -->
         <div class="well">
@@ -238,10 +240,8 @@
             </tr>
           </table>
         </div>
-        <button id="execute-button" class="btn btn-primary btn-lg"
-          style="float: right;" data-toggle="tooltip" data-placement="bottom"
-        title="Click or press Enter">Execute</button>
 
+          </div>
       </div>
 
     </div>
