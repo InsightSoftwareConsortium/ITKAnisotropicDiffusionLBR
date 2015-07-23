@@ -99,30 +99,38 @@ extern "C"
 /** Convert the input image to a PNG and resample it for display. */
 int ConvertAndResample( char * inputFileName, char * outputFileName )
 {
-  itk::ObjectFactoryBase::RegisterFactory( itk::PNGImageIOFactory::New() );
-
-  itk::ImageIOBase::Pointer imageIO = itk::ImageIOFactory::CreateImageIO( inputFileName, itk::ImageIOFactory::ReadMode );
-  if( imageIO.IsNull() )
+  try
     {
-    std::cerr << "Could not create ImageIO" << std::endl;
-    return EXIT_FAILURE;
-    }
-  imageIO->SetFileName( inputFileName );
-  imageIO->ReadImageInformation();
+    itk::ObjectFactoryBase::RegisterFactory( itk::PNGImageIOFactory::New() );
 
-  const unsigned int nComponents = imageIO->GetNumberOfComponents();
-
-  switch( nComponents )
-    {
-    case 1:
-      return ConvertAndResample< unsigned char >( inputFileName, outputFileName );
-    case 3:
-      return ConvertAndResample< itk::RGBPixel< unsigned char > >( inputFileName, outputFileName );
-    case 4:
-      return ConvertAndResample< itk::RGBAPixel< unsigned char > >( inputFileName, outputFileName );
-    default:
-      std::cerr << "Sorry, unsupported number of components." << std::endl;
+    itk::ImageIOBase::Pointer imageIO = itk::ImageIOFactory::CreateImageIO( inputFileName, itk::ImageIOFactory::ReadMode );
+    if( imageIO.IsNull() )
+      {
+      std::cerr << "Could not create ImageIO" << std::endl;
       return EXIT_FAILURE;
+      }
+    imageIO->SetFileName( inputFileName );
+    imageIO->ReadImageInformation();
+
+    const unsigned int nComponents = imageIO->GetNumberOfComponents();
+
+    switch( nComponents )
+      {
+      case 1:
+        return ConvertAndResample< unsigned char >( inputFileName, outputFileName );
+      case 3:
+        return ConvertAndResample< itk::RGBPixel< unsigned char > >( inputFileName, outputFileName );
+      case 4:
+        return ConvertAndResample< itk::RGBAPixel< unsigned char > >( inputFileName, outputFileName );
+      default:
+        std::cerr << "Sorry, unsupported number of components." << std::endl;
+        return EXIT_FAILURE;
+      }
+    }
+  catch( itk::ExceptionObject & error )
+    {
+    std::cerr << "Error: " << error << std::endl;
+    return EXIT_FAILURE;
     }
 }
 
