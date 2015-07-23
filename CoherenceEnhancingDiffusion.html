@@ -28,6 +28,7 @@
   <script type="text/javascript" src="CoherenceEnhancingDiffusion.js" async></script>
   <script type="text/javascript" src="js/FileSaver.min.js" async></script>
   <script type="text/javascript" src="js/Runner.js" async></script>
+  <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" async></script>
 </head>
 
 <body>
@@ -170,7 +171,7 @@
         <div class="well">
           <table class="table">
             <tr>
-              <td>Diffusion Time &nbsp;</td>
+              <td>Diffusion Time, \( T\)&nbsp;</td>
               <td><b>0.5</b> &nbsp; &nbsp;
                  <input id="diffusion-time-slider" type="text"
                  data-slider-min="0.5" data-slider-max="50"
@@ -179,7 +180,7 @@
              </td>
             </tr>
             <tr>
-              <td>Lambda &nbsp;</td>
+              <td>Lambda, \( \lambda\)&nbsp;</td>
               <td><b>0.5</b> &nbsp; &nbsp;
                  <input id="lambda-slider" type="text"
                  data-slider-min="0.0001" data-slider-max="0.5"
@@ -199,7 +200,7 @@
               </select></td>
             </tr>
             <tr>
-              <td>Noise Scale &nbsp;</td>
+              <td>Noise Scale, \( \sigma\)&nbsp;</td>
               <td><b>0.5</b> &nbsp; &nbsp;
                  <input id="noise-scale-slider" type="text"
                  data-slider-min="0.5" data-slider-max="5"
@@ -208,7 +209,7 @@
              </td>
             </tr>
             <tr>
-              <td>Feature Scale &nbsp;</td>
+              <td>Feature Scale, \( \rho\)&nbsp;</td>
               <td><b>2.0</b> &nbsp; &nbsp;
                  <input id="feature-scale-slider" type="text"
                  data-slider-min="2.0" data-slider-max="6"
@@ -217,7 +218,7 @@
              </td>
             </tr>
             <tr>
-              <td>Exponent &nbsp;</td>
+              <td>Exponent, \( m\)&nbsp;</td>
               <td><b>1.0</b> &nbsp; &nbsp;
                  <input id="exponent-slider" type="text"
                  data-slider-min="1.0" data-slider-max="6.0"
