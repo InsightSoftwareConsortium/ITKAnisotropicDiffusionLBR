@@ -60,9 +60,9 @@
           <div class="panel-body">
             <img src="images/PacMan.png" class="img-responsive center-block" alt="Input image"
                  id="input-image" style="visibility:hidden;">
-            <div id="input-filename">PacMan.png</div>
+            <input type="file" id="file-input" name="files[]" disabled onchange="Runner.filter.setInputFile(this.files[0])" accept="image/png"/>
           </div>
-          <input type="file" id="file-input" name="files[]" disabled onchange="Runner.filter.setInputFile(this.files[0])" accept="image/png"/>
+          <div class="panel-footer" id="input-filename">PacMan.png</div>
         </div>
       </div>
       <div class="col-sm-6">
@@ -71,11 +71,11 @@
           <div class="panel-body">
             <img src="images/PacMan.png" class="img-responsive center-block"
                  alt="Output image" id="output-image" style="visibility:hidden;">
-            <div id="output-filename">Output.png</div>
-          </div>
           <form id="download" action="">
             <input type="submit" value="Download">
           </form>
+          </div>
+          <div class="panel-footer" id="output-filename">Output.png</div>
         </div>
       </div>
     </div>
