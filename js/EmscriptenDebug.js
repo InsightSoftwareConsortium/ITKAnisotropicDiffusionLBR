@@ -2,8 +2,8 @@ var Module = {
   preRun: [],
   postRun: [],
   print: (function() {
-    var element = document.getElementById('output');
-    if (element) element.value = ''; // clear browser cache
+    //var element = document.getElementById('output');
+    //if (element) element.value = ''; // clear browser cache
     return function(text) {
       if (arguments.length > 1) text = Array.prototype.slice.call(arguments).join(' ');
       // These replacements are necessary if you render to raw HTML
@@ -12,10 +12,10 @@ var Module = {
       //text = text.replace(/>/g, "&gt;");
       //text = text.replace('\n', '<br>', 'g');
       console.log(text);
-      if (element) {
-        element.value += text + "\n";
-        element.scrollTop = element.scrollHeight; // focus on bottom
-      }
+      //if (element) {
+        //element.value += text + "\n";
+        //element.scrollTop = element.scrollHeight; // focus on bottom
+      //}
     };
   })(),
   printErr: function(text) {
