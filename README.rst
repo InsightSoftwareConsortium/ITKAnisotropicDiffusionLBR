@@ -11,7 +11,7 @@ First, clone the sources::
   cd Modules/External
   git clone https://github.com/InsightSoftwareConsortium/ITKAnisotropicDiffusionLBR.git
   cd ~/src
-  git clone --branch gh-pages https://github.com/InsightSoftwareConsortium/ITKAnisotropicDiffusionLBR.git ITKAnisotropicDiffusionLBR ITKAnisotropicDiffusionLBRWeb
+  git clone --branch gh-pages https://github.com/InsightSoftwareConsortium/ITKAnisotropicDiffusionLBR.git ITKAnisotropicDiffusionLBRWeb
 
 Next, start up the docker container::
 
