@@ -12,7 +12,7 @@ include(${ITK_USE_FILE})
 
 enable_testing()
 
-set(INPUT_DATA_DIR ${ITK_DIR}/ExternalData/Modules/External/ITKAnisotropicDiffusionLBR/test/Input)
+set(INPUT_DATA_DIR ${ITK_DIR}/ExternalData/Modules/Remote/AnisotropicDiffusionLBR/test/Input)
 if(NOT EXISTS ${INPUT_DATA_DIR}/PacMan.png)
   message(SEND_ERROR "INPUT_DATA_DIR not found!")
 endif()
