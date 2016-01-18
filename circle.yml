@@ -1,0 +1,15 @@
+machine:
+  services:
+    - docker
+
+dependencies:
+  override:
+    - docker info
+    - docker pull insighttoolkit/anisotropic-diffusion-lbr-test
+    - ~/ITKAnisotropicDiffusionLBR/test/Docker/build.sh
+
+test:
+  override:
+    - mkdir ~/ITKAnisotropicDiffusionLBR-build
+    - docker run -v ~/ITKAnisotropicDiffusionLBR:/usr/src/ITKAnisotropicDiffusionLBR -v ~/ITKAnisotropicDiffusionLBR-build:/usr/src/ITKAnisotropicDiffusionLBR-build insighttoolkit/anisotropic-diffusion-lbr-test /usr/src/ITKAnisotropicDiffusionLBR/test/Docker/test.sh
+
