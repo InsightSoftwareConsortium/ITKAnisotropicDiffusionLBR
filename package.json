@@ -1,0 +1,30 @@
+{
+  "name": "itk-anisotropic-diffusion-lbr",
+  "version": "1.0.0",
+  "description": "Anisotropic diffusion smooth with lattice basis reduction",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/InsightSoftwareConsortium/ITKAnisotropicDiffusionLBR.git"
+  },
+  "keywords": [
+    "ITK",
+    "InsightToolkit",
+    "image",
+    "smoothing",
+    "electron"
+  ],
+  "author": "Insight Software Consortium",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "http://www.itk.org/mailman/listinfo/community",
+    "email": "community@itk.org"
+  },
+  "homepage": "http://insightsoftwareconsortium.github.io/ITKAnisotropicDiffusionLBR/",
+  "devDependencies": {
+    "electron-prebuilt": "^0.36.0"
+  }
+}
