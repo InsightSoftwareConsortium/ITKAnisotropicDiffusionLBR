@@ -2,4 +2,4 @@
 
 script_dir="`cd $(dirname $0); pwd`"
 
-docker build -t insighttoolkit/anisotropicdiffusionlbr-test $script_dir
+docker build -t insighttoolkit/anisotropic-diffusion-lbr-test $script_dir
