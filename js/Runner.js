@@ -14,8 +14,8 @@ Runner.binaryToPng = function(binary_data) {
     return window.URL.createObjectURL(blob);
   } catch (err) { // in case blob / URL missing, fallback to data-uri
     var rawString = '';
-    for(var i = 0; i < output_data.length; ++i) {
-      rawString += String.fromCharCode(output_data[i]);
+    for(var i = 0; i < binary_data.length; ++i) {
+      rawString += String.fromCharCode(binary_data[i]);
     }
     return 'data:image\/png;base64,' + btoa(rawString);
   }
