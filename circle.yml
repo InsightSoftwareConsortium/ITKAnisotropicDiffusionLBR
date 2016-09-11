@@ -5,11 +5,11 @@ machine:
 dependencies:
   override:
     - docker info
-    - docker pull insighttoolkit/anisotropic-diffusion-lbr-test
+    - docker pull insighttoolkit/anisotropicdiffusionlbr-test
     - ~/ITKAnisotropicDiffusionLBR/test/Docker/build.sh
 
 test:
   override:
     - mkdir ~/ITKAnisotropicDiffusionLBR-build
-    - docker run -v ~/ITKAnisotropicDiffusionLBR:/usr/src/ITKAnisotropicDiffusionLBR -v ~/ITKAnisotropicDiffusionLBR-build:/usr/src/ITKAnisotropicDiffusionLBR-build insighttoolkit/anisotropic-diffusion-lbr-test /usr/src/ITKAnisotropicDiffusionLBR/test/Docker/test.sh
+    - docker run -v ~/ITKAnisotropicDiffusionLBR:/usr/src/ITKAnisotropicDiffusionLBR -v ~/ITKAnisotropicDiffusionLBR-build:/usr/src/ITKAnisotropicDiffusionLBR-build insighttoolkit/anisotropicdiffusionlbr-test /usr/src/ITKAnisotropicDiffusionLBR/test/Docker/test.sh
 
