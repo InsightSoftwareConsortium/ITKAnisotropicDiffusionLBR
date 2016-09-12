@@ -12,17 +12,18 @@ RUN apt-get update && apt-get install -y \
   libpng12-dev \
   libpython3-dev \
   libtiff5-dev \
-  python \
   ninja-build \
+  python3 \
+  swig3.0 \
   wget \
   vim \
   zlib1g-dev
 
 WORKDIR /usr/src
 
-# v4.9rc03-62-g69daedd
-ENV ITK_GIT_TAG 69daedd9884238a23e2675ef119b7e949a5746d3
-RUN git clone git://itk.org/ITK.git && \
+# ITK release 2016-09-11
+ENV ITK_GIT_TAG 049183e82919275d4f4c3273bbf80738ee469527
+RUN git clone https://itk.org/ITK.git && \
   cd ITK && \
   git checkout ${ITK_GIT_TAG} && \
   cd ../ && \
@@ -38,6 +39,9 @@ RUN git clone git://itk.org/ITK.git && \
     -DITK_LEGACY_REMOVE:BOOL=ON \
     -DITK_BUILD_DEFAULT_MODULES:BOOL=OFF \
     -DITK_USE_SYSTEM_LIBRARIES:BOOL=ON \
+    -DITK_WRAP_PYTHON:BOOL=ON \
+    -DSWIG_EXECUTABLE:FILEPATH=/usr/bin/swig3.0 \
+    -DPYTHON_EXECUTABLE:FILEPATH=/usr/bin/python3 \
     -DModule_ITKIOImageBase:BOOL=ON \
     -DModule_ITKIOSpatialObjects:BOOL=ON \
     -DModule_ITKMetaIO:BOOL=ON \
