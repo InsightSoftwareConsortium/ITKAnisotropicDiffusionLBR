@@ -16,11 +16,9 @@ RUN apt-get update && apt-get install -y \
   libhdf5-dev \
   libjpeg-dev \
   libpng12-dev \
-  libpython-dev \
   libtiff5-dev \
   ninja-build \
   python \
-  swig3.0 \
   wget \
   vim \
   zlib1g-dev
@@ -45,9 +43,6 @@ RUN git clone https://itk.org/ITK.git && \
     -DITK_LEGACY_REMOVE:BOOL=ON \
     -DITK_BUILD_DEFAULT_MODULES:BOOL=OFF \
     -DITK_USE_SYSTEM_LIBRARIES:BOOL=ON \
-    -DITK_WRAP_PYTHON:BOOL=ON \
-    -DSWIG_EXECUTABLE:FILEPATH=/usr/bin/swig3.0 \
-    -DPYTHON_EXECUTABLE:FILEPATH=/usr/bin/python \
     -DModule_ITKIOImageBase:BOOL=ON \
     -DModule_ITKIOSpatialObjects:BOOL=ON \
     -DModule_ITKMetaIO:BOOL=ON \
