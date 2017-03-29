@@ -1,11 +1,9 @@
 FROM debian:8
 MAINTAINER Insight Software Consortium <community@itk.org>
 
-# Insert this line before "RUN apt-get update" to dynamically
-# replace httpredir.debian.org with a single working domain
-# in attempt to "prevent" the "Error reading from server" error.
-RUN apt-get update && apt-get install -y curl && \
-  sed -i "s/httpredir.debian.org/`curl -s -D - http://httpredir.debian.org/demo/debian/ | awk '/^Link:/ { print $2 }' | sed -e 's@<http://\(.*\)/debian/>;@\1@g'`/" /etc/apt/sources.list
+# Faster and more reliable package repository
+RUN REPO=http://cdn-fastly.deb.debian.org && \
+  echo "deb $REPO/debian jessie main\ndeb $REPO/debian jessie-updates main\ndeb $REPO/debian-security jessie/updates main" > /etc/apt/sources.list
 
 RUN apt-get update && apt-get install -y \
   build-essential \
@@ -25,9 +23,9 @@ RUN apt-get update && apt-get install -y \
 
 WORKDIR /usr/src
 
-# ITK release 2016-09-11
-ENV ITK_GIT_TAG 049183e82919275d4f4c3273bbf80738ee469527
-RUN git clone https://itk.org/ITK.git && \
+# ITK master 2017-03-29
+ENV ITK_GIT_TAG ebe31b65006ec6d5658e004559af1cbb56494eb2
+RUN git clone --depth 1 https://itk.org/ITK.git && \
   cd ITK && \
   git checkout ${ITK_GIT_TAG} && \
   cd ../ && \
