@@ -23,9 +23,9 @@ RUN apt-get update && apt-get install -y \
 
 WORKDIR /usr/src
 
-# ITK release 2016-09-11
-ENV ITK_GIT_TAG 049183e82919275d4f4c3273bbf80738ee469527
-RUN git clone https://itk.org/ITK.git && \
+# ITK master 2017-03-29
+ENV ITK_GIT_TAG ebe31b65006ec6d5658e004559af1cbb56494eb2
+RUN git clone --depth 1 https://itk.org/ITK.git && \
   cd ITK && \
   git checkout ${ITK_GIT_TAG} && \
   cd ../ && \
