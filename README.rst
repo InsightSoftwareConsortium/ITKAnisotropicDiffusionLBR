@@ -21,6 +21,11 @@ Documentation can be found in the `Insight Journal article <http://insight-journ
   http://insight-journal.org/browse/publication/953
   http://hdl.handle.net/10380/3505
 
+To install the Python packages::
+
+  python -m pip install --upgrade pip
+  python -m pip install itk-anisotropicdiffusionlbr
+
 Figures from this article can be `reproduced in your web browser
 <http://insightsoftwareconsortium.github.io/ITKAnisotropicDiffusionLBR/>`_.
 Sources for the interactive figures can be found in the `gh-pages branch
