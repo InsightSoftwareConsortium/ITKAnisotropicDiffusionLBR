@@ -10,6 +10,17 @@ ITKAnisotropicDiffusionLBR
 .. image:: https://img.shields.io/appveyor/ci/thewtex/itkanisotropicdiffusionlbr.svg
     :target: https://ci.appveyor.com/project/thewtex/itkanisotropicdiffusionlbr
 
+.. image:: https://dev.azure.com/ITKAnisotropicDiffusionLBR/ITKAnisotropicDiffusionLBR/_apis/build/status/InsightSoftwareConsortium.ITKAnisotropicDiffusionLBR?branchName=master
+     :target: https://dev.azure.com/ITKAnisotropicDiffusionLBR/ITKAnisotropicDiffusionLBR/_build/latest?definitionId=1&branchName=master
+
+.. image:: https://img.shields.io/pypi/v/itk-anisotropicdiffusionlbr.svg
+    :target: https://pypi.python.org/pypi/itk-anisotropicdiffusionlbr
+    :alt: PyPI
+
+.. image:: https://img.shields.io/badge/License-Apache%202.0-blue.svg
+    :target: https://github.com/InsightSoftwareConsortium/ITKAnisotropicDiffusionLBR/blob/master/LICENSE)
+    :alt: License
+
 This `ITK <http://itk.org>`_ module implements Anisotropic Diffusion, using Lattice Basis Reduction.
 
 Documentation can be found in the `Insight Journal article <http://insight-journal.org/browse/publication/953>`_::
