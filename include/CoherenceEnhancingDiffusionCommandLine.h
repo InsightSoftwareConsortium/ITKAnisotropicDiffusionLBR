@@ -76,7 +76,7 @@ int Execute(int argc, char * argv[])
 
   const char * imageFileName = argv[1];
 
-  itk::ImageIOBase::Pointer imageIO = itk::ImageIOFactory::CreateImageIO( imageFileName, itk::ImageIOFactory::FileModeType::ReadMode );
+  itk::ImageIOBase::Pointer imageIO = itk::ImageIOFactory::CreateImageIO( imageFileName, itk::ImageIOFactory::FileModeEnum::ReadMode );
   if( imageIO.IsNull() )
     {
     std::cerr << "Could not create ImageIO" << std::endl;
