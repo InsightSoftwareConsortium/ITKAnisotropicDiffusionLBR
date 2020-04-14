@@ -1,7 +1,7 @@
 # The file template originates from the instructions: https://github.com/InsightSoftwareConsortium/ITKModuleTemplate/README.md
 variables:
-  ITKGitTag: v5.1rc02         #Used for choosing branch of ITK to checkout
-  ITKPythonGitTag: v20200228  #Used to identify the release name for the cached python build environment ITKPythonBuilds-linux.tar.zst
+  ITKGitTag: v5.1rc03         #Used for choosing branch of ITK to checkout
+  ITKPythonGitTag: v5.1rc03  #Used to identify the release name for the cached python build
   CMakeBuildType: Release
 
 trigger:
