@@ -1,15 +1,6 @@
 ITKAnisotropicDiffusionLBR
 ==========================
 
-.. image:: https://circleci.com/gh/InsightSoftwareConsortium/ITKAnisotropicDiffusionLBR.svg?style=shield
-    :target: https://circleci.com/gh/InsightSoftwareConsortium/ITKAnisotropicDiffusionLBR
-
-.. image:: https://travis-ci.org/InsightSoftwareConsortium/ITKAnisotropicDiffusionLBR.svg?branch=master
-    :target: https://travis-ci.org/InsightSoftwareConsortium/ITKAnisotropicDiffusionLBR
-
-.. image:: https://img.shields.io/appveyor/ci/thewtex/itkanisotropicdiffusionlbr.svg
-    :target: https://ci.appveyor.com/project/thewtex/itkanisotropicdiffusionlbr
-
 .. image:: https://dev.azure.com/ITKAnisotropicDiffusionLBR/ITKAnisotropicDiffusionLBR/_apis/build/status/InsightSoftwareConsortium.ITKAnisotropicDiffusionLBR?branchName=master
      :target: https://dev.azure.com/ITKAnisotropicDiffusionLBR/ITKAnisotropicDiffusionLBR/_build/latest?definitionId=1&branchName=master
 
