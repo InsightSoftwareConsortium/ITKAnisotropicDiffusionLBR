@@ -13,6 +13,8 @@ ITKAnisotropicDiffusionLBR
 .. image:: https://dev.azure.com/ITKAnisotropicDiffusionLBR/ITKAnisotropicDiffusionLBR/_apis/build/status/InsightSoftwareConsortium.ITKAnisotropicDiffusionLBR?branchName=master
      :target: https://dev.azure.com/ITKAnisotropicDiffusionLBR/ITKAnisotropicDiffusionLBR/_build/latest?definitionId=1&branchName=master
 
+.. image:: https://github.com/InsightSoftwareConsortium/ITKAnisotropicDiffusionLBR/workflows/Build,%20test,%20package/badge.svg
+
 .. image:: https://img.shields.io/pypi/v/itk-anisotropicdiffusionlbr.svg
     :target: https://pypi.python.org/pypi/itk-anisotropicdiffusionlbr
     :alt: PyPI
