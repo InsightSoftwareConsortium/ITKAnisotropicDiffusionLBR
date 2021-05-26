@@ -12,7 +12,7 @@ except ImportError:
 
 setup(
     name='itk-anisotropicdiffusionlbr',
-    version='1.2.0',
+    version='1.2.1',
     author='Insight Software Consortium',
     author_email='community@itk.org',
     packages=['itk'],
@@ -50,6 +50,6 @@ setup(
     keywords='ITK InsightToolkit',
     url=r'https://itk.org/',
     install_requires=[
-        r'itk>=5.2rc3'
+        r'itk>=5.2.0.post2'
     ]
     )
