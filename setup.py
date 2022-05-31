@@ -25,8 +25,8 @@ setup(
                      'using Lattice Basis Reduction. For more information, see  '
                      'Mirebeau J., Fehrenbach J., Risser L., Tobji S. '
                      '"Anisotropic Diffusion in ITK" '
-                     'http://insight-journal.org/browse/publication/953 '
-                     'http://hdl.handle.net/10380/3505 ',
+                     'https://insight-journal.org/browse/publication/953 '
+                     'https://hdl.handle.net/10380/3505 ',
     classifiers=[
         "License :: OSI Approved :: Apache Software License",
         "Programming Language :: Python",

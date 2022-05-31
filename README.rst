@@ -11,16 +11,16 @@ ITKAnisotropicDiffusionLBR
     :target: https://github.com/InsightSoftwareConsortium/ITKAnisotropicDiffusionLBR/blob/master/LICENSE)
     :alt: License
 
-This `ITK <http://itk.org>`_ module implements Anisotropic Diffusion, using Lattice Basis Reduction.
+This `ITK <https://itk.org>`_ module implements Anisotropic Diffusion, using Lattice Basis Reduction.
 
-Documentation can be found in the `Insight Journal article <http://insight-journal.org/browse/publication/953>`_::
+Documentation can be found in the `Insight Journal article <https://insight-journal.org/browse/publication/953>`_::
 
   Mirebeau J., Fehrenbach J., Risser L., Tobji S.
   "Anisotropic Diffusion in ITK",
   The Insight Journal,
   January-December, 2014.
-  http://insight-journal.org/browse/publication/953
-  http://hdl.handle.net/10380/3505
+  https://insight-journal.org/browse/publication/953
+  https://hdl.handle.net/10380/3505
 
 To install the Python packages::
 
