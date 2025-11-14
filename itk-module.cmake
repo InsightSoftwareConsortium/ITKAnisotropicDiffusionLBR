@@ -10,6 +10,7 @@ itk_module(AnisotropicDiffusionLBR
     ITKIOImageBase
     ITKIOSpatialObjects
     ITKMetaIO
+    ITKIOPNG
     ITKImageGradient
   TEST_DEPENDS
     ITKTestKernel
