@@ -1,3 +1,0 @@
-itkAnisotropicDiffusionLBRImageFilter\.h InternalVariables Disable
-itkLinearAnisotropicDiffusionLBRImageFilter\.h InternalVariables Disable
-itkLinearAnisotropicDiffusionLBRImageFilter\.hxx DeclarationOrder Disable
